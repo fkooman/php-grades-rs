@@ -1,0 +1,2 @@
+; default configuration
+oauthTokenEndpoint = "http://localhost/php-oauth/token.php"

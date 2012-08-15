@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Summerschool Demo API Server</title>
+</head>
+<body>
+
+<h1>Summerschool Demo API Server</h1>
+<p>
+Welcome to the <tt>php-summerschool</tt> Summerschool Demo API Server. The 
+code can be found at <a href="http://github.com/fkooman/php-summerschool">http://github.com/fkooman/php-summerschool</a>.
+</p>
+
+<h1>API Documentation</h1>
+<p>
+All requests to this service need to have the <tt>Authorization</tt> header
+provided and the client needs to have the <tt>grades</tt> scope in order to be
+allowed to request grades.
+</p>
+
+<p>
+The Authorization <tt>Bearer</tt> token can be obtained through the OAuth 
+Authorization Server.
+</p>
+
+<h2>Request Grades</h2>
+
+<p>
+There are two ways to request grades:
+</p>
+<ul>
+  <li>Using the identifier of the student;</li>
+  <li>Using the <tt>@me</tt> special identifier.</li>
+</ul>
+
+<p>
+Only the <tt>GET</tt> request method is supported.
+</p>
+
+<h2>Examples</h2>
+
+<p>
+Here the explicit user identifier is specified. Please not that this 
+identifier needs to match the identifier of the user who authorized the client.
+</p>
+
+<blockquote>
+<pre>
+$ curl -i -H "Authorization: Bearer 0dcec71fc4d788c4e04b570f73d4f3cd" http://localhost/php-summerschool/api.php/grades/fkooman
+HTTP/1.1 200 OK
+Date: Wed, 15 Aug 2012 10:24:28 GMT
+Server: Apache/2.2.22 (Unix) DAV/2 PHP/5.3.13 with Suhosin-Patch mod_ssl/2.2.22 OpenSSL/0.9.8r
+X-Powered-By: PHP/5.3.13
+Content-Length: 107
+Content-Type: application/json
+
+{"Wiskunde W":"9","Geschiedenis":"6","Aardrijkskunde":"7","Scheikunde":"7","Biologie":"6","Wiskunde A":"6"}
+</pre>
+</blockquote>
+
+<p>
+Here the explicit user identifier is replaced by the <tt>@me</tt> resource 
+which will just be replaced internally by the actual user identifier that 
+authorized the client.
+</p>
+
+<blockquote>
+<pre>
+$ curl -i -H "Authorization: Bearer 0dcec71fc4d788c4e04b570f73d4f3cd" http://localhost/php-summerschool/api.php/grades/@me
+HTTP/1.1 200 OK
+Date: Wed, 15 Aug 2012 10:24:59 GMT
+Server: Apache/2.2.22 (Unix) DAV/2 PHP/5.3.13 with Suhosin-Patch mod_ssl/2.2.22 OpenSSL/0.9.8r
+X-Powered-By: PHP/5.3.13
+Content-Length: 107
+Content-Type: application/json
+
+{"Wiskunde W":"9","Geschiedenis":"6","Aardrijkskunde":"7","Scheikunde":"7","Biologie":"6","Wiskunde A":"6"}
+</pre>
+</blockquote>
+
+<h2>Errors</h2>
+<p>
+There are a number of errors that can be triggered, to list a few:</p>
+<ul>
+    <li>You request a resource you are not allowed to access;</li>
+    <li>You request a resource that does not exist, i.e.: student has no registered grades;</li>
+    <li>The client did not get the <tt>grades</tt> scope and thus is not allowed to request grades;</li>
+</ul>
+<p>For example requesting a resource to which you do not have any access:</p>
+
+<blockquote>
+<pre>
+$ curl -i -H "Authorization: Bearer 0dcec71fc4d788c4e04b570f73d4f3cd" http://localhost/php-summerschool/api.php/grades/someotheruser
+HTTP/1.1 403 Forbidden
+Date: Wed, 15 Aug 2012 10:29:00 GMT
+Server: Apache/2.2.22 (Unix) DAV/2 PHP/5.3.13 with Suhosin-Patch mod_ssl/2.2.22 OpenSSL/0.9.8r
+X-Powered-By: PHP/5.3.13
+Content-Length: 90
+Content-Type: application/json
+
+{"error":"forbidden","error_description":"resource does not belong to authenticated user"}
+</pre>
+</blockquote>
+
+</body>
+</html>
