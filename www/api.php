@@ -51,17 +51,20 @@ try {
             $response->setStatusCode($e->getResponseCode());
             $response->setHeader("WWW-Authenticate", sprintf('Bearer realm="Resource Server",error="%s",error_description="%s"', $e->getMessage(), $e->getDescription()));
             $response->setContent(json_encode(array("error" => $e->getMessage(), "error_description" => $e->getDescription())));
+            error_log($e->getLogMessage());
             break;
 
         case "ApiException":
             $response->setStatusCode($e->getResponseCode());
             $response->setContent(json_encode(array("error" => $e->getMessage(), "error_description" => $e->getDescription())));
+            error_log($e->getLogMessage());
             break;
 
         default:
             // any other error thrown by any of the modules, assume internal server error
             $response->setStatusCode(500);
             $response->setContent(json_encode(array("error" => "internal_server_error", "error_description" => $e->getMessage())));
+            error_log($e->getMessage());
             break;
     }
 
