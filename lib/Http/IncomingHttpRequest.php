@@ -70,9 +70,10 @@ class IncomingHttpRequest {
         $requestHeaders = $_SERVER;
         if(function_exists("apache_request_headers")) {
                 $apacheHeaders = apache_request_headers();
-                if(array_key_exists("Authorization", $apacheHeaders)) {
-                        // add the HTTP_AUTHORIZATION header
-                        $requestHeaders['HTTP_AUTHORIZATION'] = $apacheHeaders['Authorization'];
+                $headerKeys = array_keys($apacheHeaders);
+                $keyPositionInArray = array_search(strtolower("Authorization"), array_map('strtolower', $headerKeys));
+                if(FALSE !== $keyPositionInArray) {
+                        $requestHeaders['HTTP_AUTHORIZATION'] = $apacheHeaders[$keyPositionInArray];
                 }
         }
         return $requestHeaders;
