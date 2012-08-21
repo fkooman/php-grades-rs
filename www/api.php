@@ -1,60 +1,66 @@
 <?php
 
-require_once "../lib/Config.php";
-require_once "../lib/Http/Uri.php";
-require_once "../lib/Http/HttpRequest.php";
-require_once "../lib/Http/HttpResponse.php";
-require_once "../lib/Http/IncomingHttpRequest.php";
-require_once "../lib/OAuth/RemoteResourceServer.php";
-require_once "../lib/OAuth/ApiException.php";
 require_once "../data/grades.php";
 
-$response = new HttpResponse();
-$response->setHeader("Content-Type", "application/json");
+$configFile = dirname(__DIR__) . DIRECTORY_SEPARATOR . "config" . DIRECTORY_SEPARATOR . "summerschool.ini";
+if(!file_exists($configFile) || !is_file($configFile) || !is_readable($configFile)) {
+    throw new ConfigException("configuration file '$configFile' not found");
+}
+$configValues = parse_ini_file($configFile, TRUE);
 
-try { 
-    $config = new Config(dirname(__DIR__) . DIRECTORY_SEPARATOR . "config" . DIRECTORY_SEPARATOR . "summerschool.ini");
+require_once $configValues["phpOAuthPath"] . DIRECTORY_SEPARATOR . "lib" . DIRECTORY_SEPARATOR . "SplClassLoader.php";
+$s = new SplClassLoader("Tuxed", $configValues["phpOAuthPath"] . DIRECTORY_SEPARATOR . "lib");
+$s->register();
+
+use \Tuxed\Http\HttpRequest as HttpRequest;
+use \Tuxed\Http\HttpResponse as HttpResponse;
+use \Tuxed\Http\IncomingHttpRequest as IncomingHttpRequest;
+use \Tuxed\OAuth\ResourceServer as ResourceServer;
+use \Tuxed\OAuth\VerifyException as VerifyException;
+use \Tuxed\OAuth\ApiException as ApiException;
+
+$response = new HttpResponse();
+
+try {
 
     $request = HttpRequest::fromIncomingHttpRequest(new IncomingHttpRequest());
 
-    $rs = new RemoteResourceServer($config->getValue("oauthTokenEndpoint"));
+    $rs = new ResourceServer();
 
     $authorizationHeader = $request->getHeader("HTTP_AUTHORIZATION");
     if(NULL === $authorizationHeader) {
         throw new VerifyException("invalid_token", "no token provided");
     }
-    $token = $rs->verify($authorizationHeader);
+    $rs->verifyAuthorizationHeader($authorizationHeader);
 
-    // verify the scope permissions
-    if(in_array($request->getCollection(), array ("grades"))) {
-        $grantedScope = explode(" ", $token['scope']);
-        if(!in_array($request->getCollection(), $grantedScope)) {
-            throw new VerifyException("insufficient_scope", "no permission for this call with granted scope");
-        }
-    }
+    $rs->requireScope("grades");
+
+    $response->setHeader("Content-Type", "application/json");
 
     if($request->matchRest("GET", "grades", TRUE)) {
-        if($request->getResource() !== $token['resource_owner_id'] && "@me" !== $request->getResource()) {
+        if($request->getResource() !== $rs->getResourceOwnerId() && "@me" !== $request->getResource()) {
             throw new ApiException("forbidden", "resource does not belong to authenticated user");
         }
-        if(!array_key_exists($token['resource_owner_id'], $grades)) {
+        if(!array_key_exists($rs->getResourceOwnerId(), $grades)) {
             throw new ApiException("not_found", "student does not have any grades");
         }
-        $response->setContent(json_encode($grades[$token['resource_owner_id']], JSON_FORCE_OBJECT));
+        $response->setContent(json_encode($grades[$rs->getResourceOwnerId()], JSON_FORCE_OBJECT));
     } else {
         throw new ApiException("invalid_request", "unsupported collection or resource request");
     }
 
 } catch (Exception $e) {
     switch(get_class($e)) {
-        case "VerifyException":
+        case "Tuxed\\OAuth\\VerifyException":
+            $response = new HttpResponse();
             $response->setStatusCode($e->getResponseCode());
             $response->setHeader("WWW-Authenticate", sprintf('Bearer realm="Resource Server",error="%s",error_description="%s"', $e->getMessage(), $e->getDescription()));
             $response->setContent(json_encode(array("error" => $e->getMessage(), "error_description" => $e->getDescription())));
             error_log($e->getLogMessage());
             break;
 
-        case "ApiException":
+        case "Tuxed\\OAuth\\ApiException":
+            $response = new HttpResponse();
             $response->setStatusCode($e->getResponseCode());
             $response->setContent(json_encode(array("error" => $e->getMessage(), "error_description" => $e->getDescription())));
             error_log($e->getLogMessage());
@@ -62,6 +68,7 @@ try {
 
         default:
             // any other error thrown by any of the modules, assume internal server error
+            $response = new HttpResponse();
             $response->setStatusCode(500);
             $response->setContent(json_encode(array("error" => "internal_server_error", "error_description" => $e->getMessage())));
             error_log($e->getMessage());

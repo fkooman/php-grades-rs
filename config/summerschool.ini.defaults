@@ -1,2 +1,2 @@
 ; default configuration
-oauthTokenEndpoint = "http://localhost/php-oauth/token.php"
+phpOAuthPath = "/var/www/html/php-oauth"
