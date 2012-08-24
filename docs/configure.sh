@@ -3,6 +3,14 @@ APP_NAME="php-summerschool"
 
 INSTALL_DIR=`pwd`
 
+# create directories
+mkdir -p data
+mkdir -p data/logs
+
+# set permissions
+chmod -R o+w data/logs
+chcon -R -t httpd_sys_rw_content_t data/logs
+
 # generate config files
 (
 cd config/

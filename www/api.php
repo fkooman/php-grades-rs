@@ -18,12 +18,22 @@ use \Tuxed\Http\IncomingHttpRequest as IncomingHttpRequest;
 use \Tuxed\OAuth\ResourceServer as ResourceServer;
 use \Tuxed\OAuth\VerifyException as VerifyException;
 use \Tuxed\OAuth\ApiException as ApiException;
+use \Tuxed\Logger as Logger;
 
 $response = new HttpResponse();
+$request = NULL;
+
+$logger = NULL;
 
 try {
+    $serviceName = array_key_exists('serviceName', $configValues) ? $configValues['serviceName'] : NULL;
+    $logFile = array_key_exists('logFile', $configValues) ? $configValues['logFile'] : NULL;
+    $logMail = array_key_exists('logMail', $configValues) ? $configValues['logMail'] : NULL;
+
+    $logger = new Logger($serviceName, $logFile, $logMail);
 
     $request = HttpRequest::fromIncomingHttpRequest(new IncomingHttpRequest());
+    $logger->logDebug($request->toString());
 
     $rs = new ResourceServer();
 
@@ -61,20 +71,23 @@ try {
     $response->setStatusCode($e->getResponseCode());
     $response->setHeader("WWW-Authenticate", sprintf('Bearer realm="Resource Server",error="%s",error_description="%s"', $e->getMessage(), $e->getDescription()));
     $response->setContent(json_encode(array("error" => $e->getMessage(), "error_description" => $e->getDescription())));
-    error_log($e->getLogMessage());
+    $logger->logFatal($e->getLogMessage(TRUE));
 } catch (ApiException $e) {
     $response = new HttpResponse();
     $response->setStatusCode($e->getResponseCode());
     $response->setContent(json_encode(array("error" => $e->getMessage(), "error_description" => $e->getDescription())));
-    error_log($e->getLogMessage());
+    $logger->logFatal($e->getLogMessage(TRUE));
 } catch (Exception $e) {
     // any other error thrown by any of the modules, assume internal server error
     $response = new HttpResponse();
     $response->setStatusCode(500);
     $response->setContent(json_encode(array("error" => "internal_server_error", "error_description" => $e->getMessage())));
-    error_log($e->getMessage());
+    $logger->logFatal($e->getMessage());
 }
 
+if(NULL !== $logger) {
+    $logger->logDebug($response->toString());
+}
 $response->sendResponse();
 
 ?>

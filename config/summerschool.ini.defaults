@@ -1,2 +1,8 @@
 ; default configuration
+serviceName = "Summerschool Demo API"
+
 phpOAuthPath = "/var/www/html/php-oauth"
+
+logFile = "/PATH/TO/APP/data/logs/summerschool.txt"
+;logMail[] = "fkooman@example.org"
+;logMail[] = "foo@example.com"
