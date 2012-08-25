@@ -3,6 +3,8 @@ serviceName = "Summerschool Demo API"
 
 phpOAuthPath = "/var/www/html/php-oauth"
 
+logLevel = 300;
+
 logFile = "/PATH/TO/APP/data/logs/summerschool.txt"
 ;logMail[] = "fkooman@example.org"
 ;logMail[] = "foo@example.com"

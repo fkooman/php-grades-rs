@@ -20,20 +20,21 @@ use \Tuxed\OAuth\VerifyException as VerifyException;
 use \Tuxed\OAuth\ApiException as ApiException;
 use \Tuxed\Logger as Logger;
 
-$response = new HttpResponse();
-$request = NULL;
-
 $logger = NULL;
+$request = NULL;
+$response = NULL;
 
 try {
+    $response = new HttpResponse();
+    $request = HttpRequest::fromIncomingHttpRequest(new IncomingHttpRequest());
+
+    $logLevel = array_key_exists('logLevel', $configValues) ? $configValues['logLevel'] : NULL;
     $serviceName = array_key_exists('serviceName', $configValues) ? $configValues['serviceName'] : NULL;
     $logFile = array_key_exists('logFile', $configValues) ? $configValues['logFile'] : NULL;
     $logMail = array_key_exists('logMail', $configValues) ? $configValues['logMail'] : NULL;
 
-    $logger = new Logger($serviceName, $logFile, $logMail);
-
-    $request = HttpRequest::fromIncomingHttpRequest(new IncomingHttpRequest());
-    $logger->logDebug($request->toString());
+    $logger = new Logger($logLevel, $serviceName, $logFile, $logMail);
+    $logger->logDebug($request);
 
     $rs = new ResourceServer();
 
@@ -71,23 +72,29 @@ try {
     $response->setStatusCode($e->getResponseCode());
     $response->setHeader("WWW-Authenticate", sprintf('Bearer realm="Resource Server",error="%s",error_description="%s"', $e->getMessage(), $e->getDescription()));
     $response->setContent(json_encode(array("error" => $e->getMessage(), "error_description" => $e->getDescription())));
-    $logger->logFatal($e->getLogMessage(TRUE));
+    if(NULL !== $logger) {
+        $logger->logFatal($e->getLogMessage(TRUE) . PHP_EOL . $request . PHP_EOL . $response);
+    }
 } catch (ApiException $e) {
     $response = new HttpResponse();
     $response->setStatusCode($e->getResponseCode());
     $response->setContent(json_encode(array("error" => $e->getMessage(), "error_description" => $e->getDescription())));
-    $logger->logFatal($e->getLogMessage(TRUE));
+    if(NULL !== $logger) {
+        $logger->logFatal($e->getLogMessage(TRUE) . PHP_EOL . $request . PHP_EOL . $response);
+    }
 } catch (Exception $e) {
     // any other error thrown by any of the modules, assume internal server error
     $response = new HttpResponse();
     $response->setStatusCode(500);
     $response->setContent(json_encode(array("error" => "internal_server_error", "error_description" => $e->getMessage())));
-    $logger->logFatal($e->getMessage());
+    if(NULL !== $logger) {
+        $logger->logFatal($e->getMessage() . PHP_EOL . $request . PHP_EOL . $response);
+    }
 }
 
 if(NULL !== $logger) {
-    $logger->logDebug($response->toString());
+    $logger->logDebug($response);
 }
-$response->sendResponse();
-
-?>
+if(NULL !== $response) {
+    $response->sendResponse();
+}
