@@ -80,6 +80,19 @@ Content-Type: application/json
 </pre>
 </blockquote>
 
+<h2>Entitlement</h2>
+<p>
+For some users there can be additional permissions. There are two more API calls:
+</p>
+<ol>
+<li>A <tt>GET</tt> request to <tt>/api.php/grades/</tt> (note the trailing slash) listing all students that have grades;</li>
+<li>A <tt>GET</tt> request to <tt>/api.php/grades/someotheruser</tt> listing grades for any student that has grades;</li>
+</ol>
+
+<p>
+These calls require the <tt>administration</tt> entitlement and should be configured in the OAuth Authorization Server.
+</p>
+
 <h2>Errors</h2>
 <p>
 There are a number of errors that can be triggered, to list a few:</p>

@@ -1,7 +1,5 @@
 <?php
 
-require_once "../data/grades.php";
-
 $configFile = dirname(__DIR__) . DIRECTORY_SEPARATOR . "config" . DIRECTORY_SEPARATOR . "summerschool.ini";
 if(!file_exists($configFile) || !is_file($configFile) || !is_readable($configFile)) {
     throw new ConfigException("configuration file '$configFile' not found");
@@ -12,11 +10,18 @@ require_once $configValues["phpOAuthPath"] . DIRECTORY_SEPARATOR . "lib" . DIREC
 $s = new SplClassLoader("Tuxed", $configValues["phpOAuthPath"] . DIRECTORY_SEPARATOR . "lib");
 $s->register();
 
+use \Tuxed\Config as Config;
+
+$config = new Config($configFile);
+$oauthConfig = new Config($config->getValue("phpOAuthPath") . DIRECTORY_SEPARATOR . "config" . DIRECTORY_SEPARATOR . "oauth.ini");
+
+require_once "../data/grades.php";
+
 use \Tuxed\Http\HttpRequest as HttpRequest;
 use \Tuxed\Http\HttpResponse as HttpResponse;
 use \Tuxed\Http\IncomingHttpRequest as IncomingHttpRequest;
 use \Tuxed\OAuth\ResourceServer as ResourceServer;
-use \Tuxed\OAuth\VerifyException as VerifyException;
+use \Tuxed\OAuth\ResourceServerException as ResourceServerException;
 use \Tuxed\OAuth\ApiException as ApiException;
 use \Tuxed\Logger as Logger;
 
@@ -28,33 +33,40 @@ try {
     $response = new HttpResponse();
     $request = HttpRequest::fromIncomingHttpRequest(new IncomingHttpRequest());
 
-    $logLevel = array_key_exists('logLevel', $configValues) ? $configValues['logLevel'] : NULL;
-    $serviceName = array_key_exists('serviceName', $configValues) ? $configValues['serviceName'] : NULL;
-    $logFile = array_key_exists('logFile', $configValues) ? $configValues['logFile'] : NULL;
-    $logMail = array_key_exists('logMail', $configValues) ? $configValues['logMail'] : NULL;
-
-    $logger = new Logger($logLevel, $serviceName, $logFile, $logMail);
+    $logger = new Logger($config->getValue('logLevel'), $config->getValue('serviceName'), $config->getValue('logFile'), $config->getValue('logMail'));
     $logger->logDebug($request);
 
-    $rs = new ResourceServer();
+    $oauthStorageBackend = '\\Tuxed\\OAuth\\' . $oauthConfig->getValue('storageBackend');
+    $storage = new $oauthStorageBackend($oauthConfig);
+
+    $rs = new ResourceServer($storage);
 
     $authorizationHeader = $request->getHeader("HTTP_AUTHORIZATION");
     if(NULL === $authorizationHeader) {
-        throw new VerifyException("invalid_token", "no token provided");
+        throw new ResourceServerException("invalid_token", "no token provided");
     }
     $rs->verifyAuthorizationHeader($authorizationHeader);
 
     $response->setHeader("Content-Type", "application/json");
 
+    $request->matchRest("GET", "/grades/", function() use ($rs, $response, $grades) {
+        $rs->requireScope("grades");
+        $rs->requireEntitlement("administration");
+        $response->setContent(json_encode(array_keys($grades)));
+    });
+
     $request->matchRest("GET", "/grades/:id", function($id) use ($rs, $response, $grades) {
         $rs->requireScope("grades");
-        if($id !== $rs->getResourceOwnerId() && $id !== "@me") {
+        if(!$rs->hasEntitlement("administration") && $id !== $rs->getResourceOwnerId() && "@me" !== $id) {
             throw new ApiException("forbidden", "resource does not belong to authenticated user");
         }
-        if(!array_key_exists($rs->getResourceOwnerId(), $grades)) {
+        if("@me" === $id) {
+            $id = $rs->getResourceOwnerId();
+        }
+        if(!array_key_exists($id, $grades)) {
             throw new ApiException("not_found", "student does not have any grades");
         }
-        $response->setContent(json_encode($grades[$rs->getResourceOwnerId()], JSON_FORCE_OBJECT));
+        $response->setContent(json_encode($grades[$id], JSON_FORCE_OBJECT));
     });
 
     $request->matchRestDefault(function($methodMatch, $patternMatch) use ($request, $response) {
@@ -67,7 +79,7 @@ try {
         }
     });
 
-} catch (VerifyException $e) {
+} catch (ResourceServerException $e) {
     $response = new HttpResponse();
     $response->setStatusCode($e->getResponseCode());
     $response->setHeader("WWW-Authenticate", sprintf('Bearer realm="Resource Server",error="%s",error_description="%s"', $e->getMessage(), $e->getDescription()));
