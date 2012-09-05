@@ -41,7 +41,7 @@ try {
 
     $rs = new ResourceServer($storage);
 
-    $authorizationHeader = $request->getHeader("HTTP_AUTHORIZATION");
+    $authorizationHeader = $request->getHeader("Authorization");
     if(NULL === $authorizationHeader) {
         throw new ResourceServerException("invalid_token", "no token provided");
     }
