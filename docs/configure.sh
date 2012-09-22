@@ -1,5 +1,5 @@
 #!/bin/sh
-APP_NAME="php-summerschool"
+APP_NAME="php-oauth-grades-rs"
 
 INSTALL_DIR=`pwd`
 

@@ -3,14 +3,14 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Summerschool Demo API Server</title>
+  <title>Demo API Server</title>
 </head>
 <body>
 
-<h1>Summerschool Demo API Server</h1>
+<h1>Demo API Server</h1>
 <p>
-Welcome to the <tt>php-summerschool</tt> Summerschool Demo API Server. The 
-code can be found at <a href="http://github.com/fkooman/php-summerschool">http://github.com/fkooman/php-summerschool</a>.
+Welcome to the <tt>php-oauth-grades-rs</tt> Demo API Server. The code can be 
+found at <a href="https://github.com/fkooman/php-oauth-grades-rs">https://github.com/fkooman/php-oauth-grades-rs</a>.
 </p>
 
 <h1>API Documentation</h1>
@@ -48,7 +48,7 @@ identifier needs to match the identifier of the user who authorized the client.
 
 <blockquote>
 <pre>
-$ curl -i -H "Authorization: Bearer 0dcec71fc4d788c4e04b570f73d4f3cd" http://localhost/php-summerschool/api.php/grades/fkooman
+$ curl -i -H "Authorization: Bearer 0dcec71fc4d788c4e04b570f73d4f3cd" http://localhost/php-oauth-grades-rs/api.php/grades/fkooman
 HTTP/1.1 200 OK
 Date: Wed, 15 Aug 2012 10:24:28 GMT
 Server: Apache/2.2.22 (Unix) DAV/2 PHP/5.3.13 with Suhosin-Patch mod_ssl/2.2.22 OpenSSL/0.9.8r
@@ -68,15 +68,15 @@ authorized the client.
 
 <blockquote>
 <pre>
-$ curl -i -H "Authorization: Bearer 0dcec71fc4d788c4e04b570f73d4f3cd" http://localhost/php-summerschool/api.php/grades/@me
+$ curl -i -H "Authorization: Bearer 0dcec71fc4d788c4e04b570f73d4f3cd" http://localhost/php-oauth-grades-rs/api.php/grades/@me
 HTTP/1.1 200 OK
 Date: Wed, 15 Aug 2012 10:24:59 GMT
 Server: Apache/2.2.22 (Unix) DAV/2 PHP/5.3.13 with Suhosin-Patch mod_ssl/2.2.22 OpenSSL/0.9.8r
 X-Powered-By: PHP/5.3.13
-Content-Length: 107
+Content-Length: 101
 Content-Type: application/json
 
-{"Wiskunde W":"9","Geschiedenis":"6","Aardrijkskunde":"7","Scheikunde":"7","Biologie":"6","Wiskunde A":"6"}
+{"Mathematics W":"9","History":"6","Geography":"7","Chemistry":"7","Biology":"6","Mathematics A":"6"}
 </pre>
 </blockquote>
 
@@ -105,7 +105,7 @@ There are a number of errors that can be triggered, to list a few:</p>
 
 <blockquote>
 <pre>
-$ curl -i -H "Authorization: Bearer 0dcec71fc4d788c4e04b570f73d4f3cd" http://localhost/php-summerschool/api.php/grades/someotheruser
+$ curl -i -H "Authorization: Bearer 0dcec71fc4d788c4e04b570f73d4f3cd" http://localhost/php-oauth-grades-rs/api.php/grades/someotheruser
 HTTP/1.1 403 Forbidden
 Date: Wed, 15 Aug 2012 10:29:00 GMT
 Server: Apache/2.2.22 (Unix) DAV/2 PHP/5.3.13 with Suhosin-Patch mod_ssl/2.2.22 OpenSSL/0.9.8r

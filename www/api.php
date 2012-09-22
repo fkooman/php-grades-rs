@@ -1,6 +1,6 @@
 <?php
 
-$configFile = dirname(__DIR__) . DIRECTORY_SEPARATOR . "config" . DIRECTORY_SEPARATOR . "summerschool.ini";
+$configFile = dirname(__DIR__) . DIRECTORY_SEPARATOR . "config" . DIRECTORY_SEPARATOR . "rs.ini";
 if(!file_exists($configFile) || !is_file($configFile) || !is_readable($configFile)) {
     throw new ConfigException("configuration file '$configFile' not found");
 }
