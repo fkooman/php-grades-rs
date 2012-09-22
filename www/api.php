@@ -33,7 +33,7 @@ try {
     $response = new HttpResponse();
     $request = HttpRequest::fromIncomingHttpRequest(new IncomingHttpRequest());
 
-    $logger = new Logger($config->getValue('logLevel'), $config->getValue('serviceName'), $config->getValue('logFile'), $config->getValue('logMail'));
+    $logger = new Logger($config->getValue('logLevel'), $config->getValue('serviceName'), $config->getValue('logFile'), $config->getValue('logMail', FALSE));
     $logger->logDebug($request);
 
     $oauthStorageBackend = '\\Tuxed\\OAuth\\' . $oauthConfig->getValue('storageBackend');
