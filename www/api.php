@@ -15,8 +15,6 @@ use \Tuxed\Config as Config;
 $config = new Config($configFile);
 $oauthConfig = new Config($config->getValue("phpOAuthPath") . DIRECTORY_SEPARATOR . "config" . DIRECTORY_SEPARATOR . "oauth.ini");
 
-require_once "../data/grades.php";
-
 use \Tuxed\Http\HttpRequest as HttpRequest;
 use \Tuxed\Http\HttpResponse as HttpResponse;
 use \Tuxed\Http\IncomingHttpRequest as IncomingHttpRequest;
@@ -30,6 +28,9 @@ $request = NULL;
 $response = NULL;
 
 try {
+
+    $grades = json_decode(file_get_contents("../data/grades.json"), TRUE);
+
     $response = new HttpResponse();
     $request = HttpRequest::fromIncomingHttpRequest(new IncomingHttpRequest());
 

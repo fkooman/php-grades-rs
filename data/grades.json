@@ -1,0 +1,690 @@
+{
+    "adria08": {
+        "Biology": 8, 
+        "English": 6, 
+        "German": 4, 
+        "Mathematics B": 7
+    }, 
+    "amaya02": {
+        "Chemistry": 5, 
+        "English": 6, 
+        "History": 5, 
+        "Physics": 7
+    }, 
+    "amaya04": {
+        "Chemistry": 9, 
+        "Dutch": 4, 
+        "French": 10, 
+        "History": 9, 
+        "Mathematics C": 9, 
+        "Physics": 4
+    }, 
+    "amena07": {
+        "Chemistry": 9, 
+        "Economics": 4, 
+        "Mathematics A": 10, 
+        "Physics": 9
+    }, 
+    "autumn01": {
+        "Biology": 7, 
+        "Chemistry": 3, 
+        "Mathematics C": 8, 
+        "Physics": 7
+    }, 
+    "avram09": {
+        "Chemistry": 9, 
+        "History": 3, 
+        "Mathematics A": 8, 
+        "Mathematics C": 8, 
+        "Physics": 6
+    }, 
+    "axel02": {
+        "Dutch": 7, 
+        "Economics": 10, 
+        "Mathematics W": 5, 
+        "Physics": 6
+    }, 
+    "baker07": {
+        "Dutch": 4, 
+        "Economics": 3, 
+        "French": 9, 
+        "Mathematics A": 6, 
+        "Physics": 7
+    }, 
+    "bertha06": {
+        "Dutch": 9, 
+        "English": 4, 
+        "German": 5, 
+        "Mathematics C": 7, 
+        "Physics": 7
+    }, 
+    "bertha09": {
+        "Dutch": 9, 
+        "Geography": 7, 
+        "German": 7, 
+        "Physics": 5
+    }, 
+    "blythe02": {
+        "Biology": 10, 
+        "French": 9, 
+        "Geography": 6, 
+        "German": 3, 
+        "Mathematics B": 7
+    }, 
+    "blythe09": {
+        "Chemistry": 3, 
+        "Dutch": 8, 
+        "German": 9, 
+        "Mathematics W": 3
+    }, 
+    "bradley03": {
+        "Dutch": 9, 
+        "English": 3, 
+        "Mathematics A": 6, 
+        "Mathematics W": 8, 
+        "Physics": 8
+    }, 
+    "burton05": {
+        "Dutch": 5, 
+        "English": 9, 
+        "French": 10, 
+        "Mathematics W": 7
+    }, 
+    "cairo02": {
+        "Biology": 10, 
+        "Chemistry": 10, 
+        "Economics": 10, 
+        "Mathematics C": 10
+    }, 
+    "christian06": {
+        "Geography": 5, 
+        "History": 9, 
+        "Physics": 9
+    }, 
+    "christian10": {
+        "Biology": 6, 
+        "Chemistry": 3, 
+        "English": 4, 
+        "French": 8, 
+        "Mathematics C": 5
+    }, 
+    "ciara10": {
+        "Biology": 7, 
+        "Chemistry": 5, 
+        "Dutch": 7, 
+        "Geography": 7, 
+        "Mathematics W": 10, 
+        "Physics": 9
+    }, 
+    "claudia06": {
+        "Economics": 7, 
+        "English": 3, 
+        "French": 9, 
+        "German": 8, 
+        "Mathematics A": 8, 
+        "Mathematics B": 5
+    }, 
+    "clayton02": {
+        "English": 4, 
+        "French": 10, 
+        "German": 9, 
+        "Mathematics A": 7, 
+        "Mathematics B": 5
+    }, 
+    "clio03": {
+        "Geography": 4, 
+        "German": 6, 
+        "History": 7, 
+        "Mathematics A": 3, 
+        "Mathematics C": 4, 
+        "Physics": 3
+    }, 
+    "conan06": {
+        "Chemistry": 10, 
+        "Economics": 5, 
+        "English": 7, 
+        "French": 4, 
+        "German": 5, 
+        "Physics": 7
+    }, 
+    "damian02": {
+        "Chemistry": 4, 
+        "Geography": 5, 
+        "German": 6, 
+        "History": 5, 
+        "Mathematics A": 10
+    }, 
+    "deacon08": {
+        "Economics": 8, 
+        "German": 4, 
+        "Mathematics A": 8, 
+        "Mathematics C": 7
+    }, 
+    "dean06": {
+        "Dutch": 8, 
+        "German": 10, 
+        "Mathematics C": 7, 
+        "Mathematics W": 3
+    }, 
+    "dennis02": {
+        "Biology": 5, 
+        "English": 6, 
+        "French": 8, 
+        "Mathematics W": 4, 
+        "Physics": 6
+    }, 
+    "derek10": {
+        "Economics": 8, 
+        "Geography": 4, 
+        "German": 5, 
+        "History": 8, 
+        "Mathematics B": 8, 
+        "Physics": 7
+    }, 
+    "desirae06": {
+        "Dutch": 7, 
+        "Economics": 5, 
+        "French": 5, 
+        "German": 10, 
+        "History": 9
+    }, 
+    "dolan04": {
+        "Biology": 3, 
+        "French": 5, 
+        "German": 6, 
+        "History": 7, 
+        "Mathematics B": 8
+    }, 
+    "doris07": {
+        "English": 9, 
+        "French": 7, 
+        "German": 10, 
+        "Mathematics C": 5, 
+        "Physics": 4
+    }, 
+    "emily01": {
+        "Biology": 9, 
+        "Economics": 10, 
+        "French": 3, 
+        "Mathematics A": 5, 
+        "Mathematics B": 8
+    }, 
+    "erin07": {
+        "Biology": 9, 
+        "Economics": 6, 
+        "History": 8, 
+        "Physics": 8
+    }, 
+    "francis05": {
+        "Dutch": 4, 
+        "Economics": 7, 
+        "French": 10, 
+        "Mathematics A": 5, 
+        "Physics": 4
+    }, 
+    "gannon01": {
+        "Chemistry": 6, 
+        "French": 4, 
+        "Mathematics A": 6, 
+        "Mathematics W": 8
+    }, 
+    "germaine03": {
+        "Economics": 9, 
+        "English": 4, 
+        "French": 9, 
+        "German": 9, 
+        "Mathematics W": 8
+    }, 
+    "hayfa05": {
+        "Biology": 5, 
+        "Dutch": 7, 
+        "French": 6, 
+        "Mathematics C": 3
+    }, 
+    "helen04": {
+        "Geography": 9, 
+        "German": 10, 
+        "Mathematics B": 6, 
+        "Mathematics C": 6, 
+        "Mathematics W": 9
+    }, 
+    "imogene05": {
+        "French": 6, 
+        "History": 4, 
+        "Mathematics A": 10, 
+        "Mathematics C": 10, 
+        "Physics": 6
+    }, 
+    "ina04": {
+        "Biology": 4, 
+        "Chemistry": 8, 
+        "Geography": 10, 
+        "History": 4, 
+        "Mathematics A": 4, 
+        "Mathematics W": 10
+    }, 
+    "isabelle10": {
+        "Chemistry": 10, 
+        "Dutch": 9, 
+        "Mathematics C": 6, 
+        "Mathematics W": 5, 
+        "Physics": 6
+    }, 
+    "jacob09": {
+        "Chemistry": 9, 
+        "Dutch": 4, 
+        "French": 4, 
+        "Mathematics A": 4, 
+        "Mathematics B": 10, 
+        "Mathematics C": 9
+    }, 
+    "jamalia02": {
+        "Economics": 9, 
+        "Mathematics A": 10, 
+        "Mathematics C": 8, 
+        "Mathematics W": 6, 
+        "Physics": 4
+    }, 
+    "janna01": {
+        "Chemistry": 9, 
+        "Dutch": 5, 
+        "English": 3, 
+        "Mathematics B": 3
+    }, 
+    "janna09": {
+        "Biology": 5, 
+        "Economics": 4, 
+        "English": 9, 
+        "French": 8, 
+        "Mathematics B": 10, 
+        "Mathematics C": 6
+    }, 
+    "jemima05": {
+        "English": 3, 
+        "French": 5, 
+        "Geography": 8, 
+        "German": 10, 
+        "Mathematics A": 10, 
+        "Mathematics C": 6
+    }, 
+    "jermaine05": {
+        "Economics": 6, 
+        "German": 6, 
+        "History": 8, 
+        "Mathematics W": 4, 
+        "Physics": 6
+    }, 
+    "jesse04": {
+        "Biology": 6, 
+        "Chemistry": 9, 
+        "Dutch": 3, 
+        "German": 8, 
+        "Mathematics C": 4
+    }, 
+    "jordan03": {
+        "Dutch": 5, 
+        "Geography": 10, 
+        "German": 10, 
+        "Physics": 5
+    }, 
+    "jordan05": {
+        "Biology": 8, 
+        "Dutch": 3, 
+        "Economics": 4, 
+        "Mathematics W": 9, 
+        "Physics": 3
+    }, 
+    "joseph03": {
+        "Chemistry": 8, 
+        "Economics": 5, 
+        "English": 9, 
+        "French": 7, 
+        "Mathematics B": 10
+    }, 
+    "judith06": {
+        "Dutch": 9, 
+        "Economics": 5, 
+        "English": 6, 
+        "Geography": 7, 
+        "History": 4
+    }, 
+    "keefe10": {
+        "Chemistry": 8, 
+        "English": 7, 
+        "History": 9, 
+        "Mathematics B": 4, 
+        "Physics": 9
+    }, 
+    "kennedy09": {
+        "English": 6, 
+        "French": 4, 
+        "Geography": 3, 
+        "History": 10, 
+        "Mathematics W": 9
+    }, 
+    "kessie07": {
+        "Biology": 6, 
+        "Dutch": 3, 
+        "History": 8, 
+        "Mathematics A": 9, 
+        "Mathematics C": 8, 
+        "Mathematics W": 10
+    }, 
+    "kevin01": {
+        "Chemistry": 3, 
+        "English": 6, 
+        "Geography": 8, 
+        "Mathematics B": 10, 
+        "Mathematics W": 6
+    }, 
+    "lael01": {
+        "Chemistry": 8, 
+        "German": 10, 
+        "History": 8, 
+        "Mathematics W": 6
+    }, 
+    "laura05": {
+        "Biology": 8, 
+        "Chemistry": 5, 
+        "French": 6, 
+        "German": 4, 
+        "Mathematics W": 4
+    }, 
+    "leila07": {
+        "Dutch": 9, 
+        "Economics": 8, 
+        "English": 9, 
+        "French": 4, 
+        "History": 8, 
+        "Mathematics W": 9
+    }, 
+    "leslie09": {
+        "Biology": 7, 
+        "Dutch": 4, 
+        "French": 4, 
+        "Mathematics B": 7
+    }, 
+    "lester09": {
+        "English": 9, 
+        "Geography": 7, 
+        "History": 8, 
+        "Mathematics C": 9
+    }, 
+    "lillian02": {
+        "Economics": 6, 
+        "English": 4, 
+        "Geography": 9, 
+        "German": 4, 
+        "Mathematics B": 3
+    }, 
+    "madaline09": {
+        "Biology": 10, 
+        "Chemistry": 7, 
+        "German": 4, 
+        "Mathematics C": 7, 
+        "Physics": 9
+    }, 
+    "martha01": {
+        "Economics": 4, 
+        "Geography": 10, 
+        "German": 4, 
+        "History": 7, 
+        "Mathematics A": 4, 
+        "Physics": 5
+    }, 
+    "melinda05": {
+        "Biology": 7, 
+        "Chemistry": 10, 
+        "Economics": 9, 
+        "Geography": 10, 
+        "History": 7
+    }, 
+    "michael04": {
+        "Chemistry": 7, 
+        "Economics": 3, 
+        "French": 7, 
+        "History": 7, 
+        "Mathematics C": 6
+    }, 
+    "mikayla05": {
+        "Chemistry": 10, 
+        "French": 5, 
+        "German": 5, 
+        "Physics": 6
+    }, 
+    "mira05": {
+        "Chemistry": 7, 
+        "Economics": 5, 
+        "English": 8, 
+        "Mathematics B": 8, 
+        "Mathematics C": 7, 
+        "Physics": 4
+    }, 
+    "mollie01": {
+        "Chemistry": 4, 
+        "Economics": 9, 
+        "German": 3, 
+        "Mathematics W": 8, 
+        "Physics": 6
+    }, 
+    "nathan04": {
+        "Biology": 9, 
+        "Chemistry": 8, 
+        "Economics": 5, 
+        "English": 3, 
+        "Physics": 5
+    }, 
+    "nerea01": {
+        "Biology": 5, 
+        "Economics": 9, 
+        "English": 9, 
+        "Mathematics B": 6, 
+        "Mathematics C": 8
+    }, 
+    "nerea10": {
+        "Biology": 9, 
+        "Chemistry": 8, 
+        "Geography": 10, 
+        "History": 8, 
+        "Mathematics W": 3
+    }, 
+    "nicole06": {
+        "Chemistry": 4, 
+        "French": 5, 
+        "History": 4, 
+        "Mathematics C": 9, 
+        "Mathematics W": 8
+    }, 
+    "nigel09": {
+        "Biology": 8, 
+        "Dutch": 5, 
+        "German": 7, 
+        "Mathematics B": 3, 
+        "Physics": 4
+    }, 
+    "ocean01": {
+        "Chemistry": 8, 
+        "Economics": 6, 
+        "German": 8, 
+        "Mathematics B": 4, 
+        "Physics": 7
+    }, 
+    "orson07": {
+        "Biology": 3, 
+        "Dutch": 9, 
+        "French": 3, 
+        "German": 9, 
+        "History": 8
+    }, 
+    "paula08": {
+        "Dutch": 5, 
+        "German": 5, 
+        "Mathematics A": 8, 
+        "Mathematics B": 10, 
+        "Physics": 10
+    }, 
+    "prescott02": {
+        "Biology": 6, 
+        "Chemistry": 10, 
+        "French": 9, 
+        "Geography": 6, 
+        "Mathematics A": 6, 
+        "Physics": 4
+    }, 
+    "quinlan02": {
+        "English": 3, 
+        "Geography": 10, 
+        "German": 3, 
+        "Mathematics A": 10, 
+        "Physics": 9
+    }, 
+    "rahim01": {
+        "Dutch": 5, 
+        "Economics": 9, 
+        "French": 8, 
+        "Geography": 3, 
+        "Mathematics C": 6
+    }, 
+    "raja07": {
+        "Dutch": 6, 
+        "Geography": 5, 
+        "History": 7, 
+        "Mathematics A": 3, 
+        "Mathematics B": 10
+    }, 
+    "ray09": {
+        "Biology": 4, 
+        "French": 8, 
+        "History": 9, 
+        "Mathematics C": 4, 
+        "Mathematics W": 5, 
+        "Physics": 4
+    }, 
+    "rhonda09": {
+        "Chemistry": 6, 
+        "Dutch": 5, 
+        "Economics": 3, 
+        "English": 8, 
+        "Mathematics B": 6, 
+        "Physics": 3
+    }, 
+    "samuel10": {
+        "Biology": 9, 
+        "English": 3, 
+        "German": 3, 
+        "History": 10, 
+        "Mathematics C": 9, 
+        "Physics": 9
+    }, 
+    "sean09": {
+        "Biology": 8, 
+        "Economics": 4, 
+        "English": 6, 
+        "History": 5
+    }, 
+    "shafira07": {
+        "Economics": 4, 
+        "English": 9, 
+        "French": 6, 
+        "Mathematics A": 4, 
+        "Physics": 8
+    }, 
+    "stella09": {
+        "Economics": 6, 
+        "Geography": 6, 
+        "Mathematics B": 7, 
+        "Physics": 5
+    }, 
+    "tad01": {
+        "Economics": 9, 
+        "French": 3, 
+        "Geography": 5, 
+        "Mathematics C": 10, 
+        "Physics": 3
+    }, 
+    "travis04": {
+        "Biology": 9, 
+        "History": 7, 
+        "Mathematics A": 8, 
+        "Physics": 6
+    }, 
+    "uta02": {
+        "Biology": 4, 
+        "Chemistry": 10, 
+        "Economics": 9, 
+        "French": 8
+    }, 
+    "virginia10": {
+        "Biology": 10, 
+        "Dutch": 3, 
+        "English": 4, 
+        "French": 3, 
+        "Geography": 8
+    }, 
+    "wallace05": {
+        "Dutch": 7, 
+        "German": 4, 
+        "History": 4, 
+        "Mathematics B": 6
+    }, 
+    "wang08": {
+        "Biology": 10, 
+        "Dutch": 6, 
+        "French": 8, 
+        "Mathematics A": 6, 
+        "Mathematics C": 3, 
+        "Physics": 5
+    }, 
+    "william03": {
+        "Dutch": 10, 
+        "Economics": 7, 
+        "English": 6, 
+        "German": 9, 
+        "Mathematics A": 10, 
+        "Mathematics C": 4
+    }, 
+    "wylie02": {
+        "Biology": 9, 
+        "English": 5, 
+        "Geography": 8, 
+        "German": 10, 
+        "History": 7, 
+        "Mathematics B": 8
+    }, 
+    "yeo09": {
+        "English": 6, 
+        "Mathematics A": 6, 
+        "Mathematics B": 4, 
+        "Physics": 4
+    }, 
+    "yolanda05": {
+        "Dutch": 7, 
+        "Economics": 3, 
+        "Geography": 5, 
+        "German": 6, 
+        "History": 5, 
+        "Mathematics B": 7
+    }, 
+    "yvonne06": {
+        "Biology": 6, 
+        "Chemistry": 4, 
+        "Geography": 9, 
+        "Mathematics A": 5, 
+        "Physics": 4
+    }, 
+    "zahir03": {
+        "Dutch": 3, 
+        "Economics": 4, 
+        "History": 7, 
+        "Mathematics A": 8, 
+        "Mathematics C": 6, 
+        "Physics": 7
+    }, 
+    "zia04": {
+        "Economics": 4, 
+        "Geography": 5, 
+        "History": 3, 
+        "Mathematics B": 10, 
+        "Physics": 7
+    }
+}
