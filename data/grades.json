@@ -4,25 +4,25 @@
         "Dutch": 4, 
         "French": 10, 
         "History": 9, 
-        "Mathematics C": 9, 
+        "Mathematics": 9, 
         "Physics": 4
     }, 
     "jmatson": {
         "Chemistry": 9, 
         "Economics": 4, 
-        "Mathematics A": 10, 
+        "Mathematics": 10, 
         "Physics": 9
     }, 
     "jstroud": {
         "Biology": 8, 
         "English": 6, 
         "German": 4, 
-        "Mathematics B": 7
+        "Mathematics": 7
     }, 
     "mcram": {
         "Biology": 7, 
         "Chemistry": 3, 
-        "Mathematics C": 8, 
+        "Mathematics": 8, 
         "Physics": 7
     }, 
     "mwisdom": {
