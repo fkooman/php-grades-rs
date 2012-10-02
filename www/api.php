@@ -52,17 +52,18 @@ try {
 
     $request->matchRest("GET", "/grades/", function() use ($rs, $response, $grades) {
         $rs->requireScope("grades");
-        $rs->requireEntitlement("administration");
+        $rs->requireEntitlement("urn:vnd:grades:administration");
         $response->setContent(json_encode(array_keys($grades)));
     });
 
     $request->matchRest("GET", "/grades/:id", function($id) use ($rs, $response, $grades) {
         $rs->requireScope("grades");
-        if(!$rs->hasEntitlement("administration") && $id !== $rs->getResourceOwnerId() && "@me" !== $id) {
+        $uid = $rs->getAttribute("uid");
+        if(!$rs->hasEntitlement("urn:vnd:grades:administration") && $id !== $uid[0] && "@me" !== $id) {
             throw new ApiException("forbidden", "resource does not belong to authenticated user");
         }
         if("@me" === $id) {
-            $id = $rs->getResourceOwnerId();
+            $id = $uid[0];
         }
         if(!array_key_exists($id, $grades)) {
             throw new ApiException("not_found", "student does not have any grades");
