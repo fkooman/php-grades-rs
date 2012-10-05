@@ -53,7 +53,11 @@ try {
     $request->matchRest("GET", "/grades/", function() use ($rs, $response, $grades) {
         $rs->requireScope("grades");
         $rs->requireEntitlement("urn:vnd:grades:administration");
-        $response->setContent(json_encode(array_keys($grades)));
+        $studentList = array();
+        foreach(array_keys($grades) as $k) {
+            array_push($studentList, array("id" => $k));
+        }
+        $response->setContent(json_encode($studentList));
     });
 
     $request->matchRest("GET", "/grades/:id", function($id) use ($rs, $response, $grades) {
@@ -68,7 +72,7 @@ try {
         if(!array_key_exists($id, $grades)) {
             throw new ApiException("not_found", "student does not have any grades");
         }
-        $response->setContent(json_encode($grades[$id], JSON_FORCE_OBJECT));
+        $response->setContent(json_encode($grades[$id]));
     });
 
     $request->matchRestDefault(function($methodMatch, $patternMatch) use ($request, $response) {

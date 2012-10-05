@@ -1,34 +1,100 @@
 {
-    "bcatee": {
-        "Chemistry": 9, 
-        "Dutch": 4, 
-        "French": 10, 
-        "History": 9, 
-        "Mathematics": 9, 
-        "Physics": 4
-    }, 
-    "jmatson": {
-        "Chemistry": 9, 
-        "Economics": 4, 
-        "Mathematics": 10, 
-        "Physics": 9
-    }, 
-    "jstroud": {
-        "Biology": 8, 
-        "English": 6, 
-        "German": 4, 
-        "Mathematics": 7
-    }, 
-    "mcram": {
-        "Biology": 7, 
-        "Chemistry": 3, 
-        "Mathematics": 8, 
-        "Physics": 7
-    }, 
-    "mwisdom": {
-        "Chemistry": 5, 
-        "English": 6, 
-        "History": 5, 
-        "Physics": 7
-    }
+    "bcatee": [
+        {
+            "course": "Chemistry", 
+            "grade": 9
+        }, 
+        {
+            "course": "Dutch", 
+            "grade": 4
+        }, 
+        {
+            "course": "French", 
+            "grade": 10
+        }, 
+        {
+            "course": "History", 
+            "grade": 9
+        }, 
+        {
+            "course": "Mathematics", 
+            "grade": 9
+        }, 
+        {
+            "course": "Physics", 
+            "grade": 4
+        }
+    ], 
+    "jmatson": [
+        {
+            "course": "Chemistry", 
+            "grade": 9
+        }, 
+        {
+            "course": "Economics", 
+            "grade": 4
+        }, 
+        {
+            "course": "Mathematics", 
+            "grade": 10
+        }, 
+        {
+            "course": "Physics", 
+            "grade": 9
+        }
+    ], 
+    "jstroud": [
+        {
+            "course": "Biology", 
+            "grade": 8
+        }, 
+        {
+            "course": "English", 
+            "grade": 6
+        }, 
+        {
+            "course": "German", 
+            "grade": 4
+        }, 
+        {
+            "course": "Mathematics", 
+            "grade": 7
+        }
+    ], 
+    "mcram": [
+        {
+            "course": "Biology", 
+            "grade": 7
+        }, 
+        {
+            "course": "Chemistry", 
+            "grade": 3
+        }, 
+        {
+            "course": "Mathematics", 
+            "grade": 8
+        }, 
+        {
+            "course": "Physics", 
+            "grade": 7
+        }
+    ], 
+    "mwisdom": [
+        {
+            "course": "Chemistry", 
+            "grade": 5
+        }, 
+        {
+            "course": "English", 
+            "grade": 6
+        }, 
+        {
+            "course": "History", 
+            "grade": 5
+        }, 
+        {
+            "course": "Physics", 
+            "grade": 7
+        }
+    ]
 }

@@ -48,15 +48,15 @@ identifier needs to match the identifier of the user who authorized the client.
 
 <blockquote>
 <pre>
-$ curl -i -H "Authorization: Bearer 0dcec71fc4d788c4e04b570f73d4f3cd" http://localhost/php-oauth-grades-rs/api.php/grades/fkooman
+$ curl -i -H "Authorization: Bearer ABCDEF" http://localhost/php-oauth-grades-rs/api.php/grades/bcatee
 HTTP/1.1 200 OK
-Date: Wed, 15 Aug 2012 10:24:28 GMT
-Server: Apache/2.2.22 (Unix) DAV/2 PHP/5.3.13 with Suhosin-Patch mod_ssl/2.2.22 OpenSSL/0.9.8r
-X-Powered-By: PHP/5.3.13
-Content-Length: 107
+Date: Fri, 05 Oct 2012 11:48:51 GMT
+Server: Apache/2.2.22 (Unix) DAV/2 PHP/5.3.15 with Suhosin-Patch mod_ssl/2.2.22 OpenSSL/0.9.8r
+X-Powered-By: PHP/5.3.15
+Content-Length: 191
 Content-Type: application/json
 
-{"Wiskunde W":"9","Geschiedenis":"6","Aardrijkskunde":"7","Scheikunde":"7","Biologie":"6","Wiskunde A":"6"}
+[{"course":"Chemistry","grade":9},{"course":"Dutch","grade":4},{"course":"French","grade":10},{"course":"History","grade":9},{"course":"Mathematics","grade":9},{"course":"Physics","grade":4}]
 </pre>
 </blockquote>
 
@@ -68,15 +68,15 @@ authorized the client.
 
 <blockquote>
 <pre>
-$ curl -i -H "Authorization: Bearer 0dcec71fc4d788c4e04b570f73d4f3cd" http://localhost/php-oauth-grades-rs/api.php/grades/@me
+$ curl -i -H "Authorization: Bearer ABCDEF" http://localhost/php-oauth-grades-rs/api.php/grades/@me
 HTTP/1.1 200 OK
-Date: Wed, 15 Aug 2012 10:24:59 GMT
-Server: Apache/2.2.22 (Unix) DAV/2 PHP/5.3.13 with Suhosin-Patch mod_ssl/2.2.22 OpenSSL/0.9.8r
-X-Powered-By: PHP/5.3.13
-Content-Length: 101
+Date: Fri, 05 Oct 2012 11:48:51 GMT
+Server: Apache/2.2.22 (Unix) DAV/2 PHP/5.3.15 with Suhosin-Patch mod_ssl/2.2.22 OpenSSL/0.9.8r
+X-Powered-By: PHP/5.3.15
+Content-Length: 191
 Content-Type: application/json
 
-{"Mathematics W":"9","History":"6","Geography":"7","Chemistry":"7","Biology":"6","Mathematics A":"6"}
+[{"course":"Chemistry","grade":9},{"course":"Dutch","grade":4},{"course":"French","grade":10},{"course":"History","grade":9},{"course":"Mathematics","grade":9},{"course":"Physics","grade":4}]
 </pre>
 </blockquote>
 
@@ -89,8 +89,24 @@ For some users there can be additional permissions. There are two more API calls
 <li>A <tt>GET</tt> request to <tt>/api.php/grades/someotheruser</tt> listing grades for any student that has grades;</li>
 </ol>
 
+The response format of getting a list of students is like this:
+
+<blockquote>
+<pre>
+$ curl -i -H "Authorization: Bearer FEDCBA" http://localhost/php-oauth-grades-rs/api.php/grades/      
+HTTP/1.1 200 OK
+Date: Fri, 05 Oct 2012 11:51:32 GMT
+Server: Apache/2.2.22 (Unix) DAV/2 PHP/5.3.15 with Suhosin-Patch mod_ssl/2.2.22 OpenSSL/0.9.8r
+X-Powered-By: PHP/5.3.15
+Content-Length: 83
+Content-Type: application/json
+
+[{"id":"bcatee"},{"id":"jmatson"},{"id":"jstroud"},{"id":"mcram"},{"id":"mwisdom"}]
+</pre>
+</blockquote>
+
 <p>
-These calls require the <tt>administration</tt> entitlement and should be configured in the OAuth Authorization Server.
+These calls require the <tt>urn:vnd:grades:administration</tt> entitlement and should be configured in the OAuth Authorization Server.
 </p>
 
 <h2>Errors</h2>
@@ -105,7 +121,7 @@ There are a number of errors that can be triggered, to list a few:</p>
 
 <blockquote>
 <pre>
-$ curl -i -H "Authorization: Bearer 0dcec71fc4d788c4e04b570f73d4f3cd" http://localhost/php-oauth-grades-rs/api.php/grades/someotheruser
+$ curl -i -H "Authorization: Bearer ABCDEF" http://localhost/php-oauth-grades-rs/api.php/grades/someotheruser
 HTTP/1.1 403 Forbidden
 Date: Wed, 15 Aug 2012 10:29:00 GMT
 Server: Apache/2.2.22 (Unix) DAV/2 PHP/5.3.13 with Suhosin-Patch mod_ssl/2.2.22 OpenSSL/0.9.8r
