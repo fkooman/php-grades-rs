@@ -4,20 +4,19 @@ class RemoteResourceServer
 {
     private $_config;
 
-    private $_entitlementEnforcement;
     private $_grantedScope;
     private $_resourceOwnerId;
     private $_resourceOwnerAttributes;
+    private $_isVerified;
 
     public function __construct(array $c)
     {
         $this->_config = $c;
 
-        $this->_entitlementEnforcement = TRUE;
         $this->_resourceOwnerId = NULL;
         $this->_grantedScope = NULL;
         $this->_resourceOwnerAttributes = NULL;
-        $this->_verified = FALSE;
+        $this->_isVerified = FALSE;
     }
 
     public function verifyRequest()
@@ -64,28 +63,23 @@ class RemoteResourceServer
 
         $token = json_decode($output, TRUE);
         if (NULL === $token) {
-            $this->_handleException("XXX", "unable to decode the token response");
+            $this->_handleException("internal_server_error", "unable to decode the token response from authorization server");
         }
 
-        if (time() > $token['issue_time'] + $token['expires_in']) {
+        if ($token['expires_in'] < 0) {
             $this->_handleException("invalid_token", "the access token expired");
         }
 
-        $this->_resourceOwnerId = $token['resource_owner_id'];
+        $this->_resourceOwnerId = $token['user_id'];
         $this->_grantedScope = $token['scope'];
-        $this->_resourceOwnerAttributes = $token['resource_owner_attributes'];
+        $this->_resourceOwnerAttributes = $token['attributes'];
 
-        $this->_verified = TRUE;
-    }
-
-    public function setEntitlementEnforcement($enforce = TRUE)
-    {
-        $this->_entitlementEnforcement = $enforce;
+        $this->_isVerified = TRUE;
     }
 
     public function getResourceOwnerId()
     {
-        if (!$this->_verified) {
+        if (!$this->_isVerified) {
             $this->_handleException("internal_server_error", "verify method needs to be requested first");
         }
 
@@ -94,7 +88,7 @@ class RemoteResourceServer
 
     public function getScope()
     {
-        if (!$this->_verified) {
+        if (!$this->_isVerified) {
             $this->_handleException("internal_server_error", "verify method needs to be requested first");
         }
         if (NULL === $this->_grantedScope) {
@@ -106,7 +100,7 @@ class RemoteResourceServer
 
     public function getEntitlement()
     {
-        if (!$this->_verified) {
+        if (!$this->_isVerified) {
             $this->_handleException("internal_server_error", "verify method needs to be requested first");
         }
         if (!array_key_exists("entitlement", $this->_resourceOwnerAttributes)) {
@@ -118,7 +112,7 @@ class RemoteResourceServer
 
     public function hasScope($scope)
     {
-        if (!$this->_verified) {
+        if (!$this->_isVerified) {
             $this->_handleException("internal_server_error", "verify method needs to be requested first");
         }
         if (NULL === $this->_grantedScope) {
@@ -134,7 +128,7 @@ class RemoteResourceServer
 
     public function requireScope($scope)
     {
-        if (!$this->_verified) {
+        if (!$this->_isVerified) {
             $this->_handleException("internal_server_error", "verify method needs to be requested first");
         }
         if (FALSE === $this->hasScope($scope)) {
@@ -144,7 +138,7 @@ class RemoteResourceServer
 
     public function hasEntitlement($entitlement)
     {
-        if (!$this->_verified) {
+        if (!$this->_isVerified) {
             $this->_handleException("internal_server_error", "verify method needs to be requested first");
         }
         if (!array_key_exists("entitlement", $this->_resourceOwnerAttributes)) {
@@ -156,19 +150,18 @@ class RemoteResourceServer
 
     public function requireEntitlement($entitlement)
     {
-        if (!$this->_verified) {
+        if (!$this->_isVerified) {
             $this->_handleException("internal_server_error", "verify method needs to be requested first");
         }
-        if ($this->_entitlementEnforcement) {
-            if (FALSE === $this->hasEntitlement($entitlement)) {
-                $this->_handleException("insufficient_entitlement", "no permission for this call with granted entitlement");
-            }
+
+        if (FALSE === $this->hasEntitlement($entitlement)) {
+            $this->_handleException("insufficient_entitlement", "no permission for this call with granted entitlement");
         }
     }
 
     public function getAttributes()
     {
-        if (!$this->_verified) {
+        if (!$this->_isVerified) {
             $this->_handleException("internal_server_error", "verify method needs to be requested first");
         }
 
@@ -177,7 +170,7 @@ class RemoteResourceServer
 
     public function getAttribute($key)
     {
-        if (!$this->_verified) {
+        if (!$this->_isVerified) {
             $this->_handleException("internal_server_error", "verify method needs to be requested first");
         }
         $attributes = $this->getAttributes();
