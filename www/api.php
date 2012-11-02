@@ -1,17 +1,18 @@
 <?php
 
-require_once "../lib/ApiException.php";
-require_once "../lib/RemoteResourceServer.php";
-require_once "../extlib/php-oauth/lib/SplClassLoader.php";
+require_once '../lib/ApiException.php';
+require_once '../lib/RemoteResourceServer.php';
 
-$c =  new SplClassLoader("Tuxed", dirname(__DIR__) . DIRECTORY_SEPARATOR . "extlib" . DIRECTORY_SEPARATOR . "php-oauth" . DIRECTORY_SEPARATOR . "lib");
-$c->register();
+require_once '../lib/SplClassLoader.php';
 
-use \Tuxed\Config as Config;
-use \Tuxed\Http\HttpRequest as HttpRequest;
-use \Tuxed\Http\HttpResponse as HttpResponse;
-use \Tuxed\Http\IncomingHttpRequest as IncomingHttpRequest;
-use \Tuxed\Logger as Logger;
+$c1 = new SplClassLoader("RestService", "../extlib/php-rest-service/lib");
+$c1->register();
+
+use \RestService\Utils\Config as Config;
+use \RestService\Http\HttpRequest as HttpRequest;
+use \RestService\Http\HttpResponse as HttpResponse;
+use \RestService\Http\IncomingHttpRequest as IncomingHttpRequest;
+use \RestService\Utils\Logger as Logger;
 
 $logger = NULL;
 $request = NULL;
@@ -35,7 +36,7 @@ try {
         $rs->requireScope("grades");
         $rs->requireEntitlement("urn:vnd:grades:administration");
         $studentList = array();
-        foreach(array_keys($grades) as $k) {
+        foreach (array_keys($grades) as $k) {
             array_push($studentList, array("id" => $k));
         }
         $response->setContent(json_encode($studentList));
@@ -44,21 +45,21 @@ try {
     $request->matchRest("GET", "/grades/:id", function($id) use ($rs, $response, $grades) {
         $rs->requireScope("grades");
         $uid = $rs->getAttribute("uid");
-        if(!$rs->hasEntitlement("urn:vnd:grades:administration") && $id !== $uid[0] && "@me" !== $id) {
+        if (!$rs->hasEntitlement("urn:vnd:grades:administration") && $id !== $uid[0] && "@me" !== $id) {
             throw new ApiException("forbidden", "resource does not belong to authenticated user");
         }
-        if("@me" === $id) {
+        if ("@me" === $id) {
             $id = $uid[0];
         }
-        if(!array_key_exists($id, $grades)) {
+        if (!array_key_exists($id, $grades)) {
             throw new ApiException("not_found", "student does not have any grades");
         }
         $response->setContent(json_encode($grades[$id]));
     });
 
     $request->matchRestDefault(function($methodMatch, $patternMatch) use ($request, $response) {
-        if(in_array($request->getRequestMethod(), $methodMatch)) {
-            if(!$patternMatch) {
+        if (in_array($request->getRequestMethod(), $methodMatch)) {
+            if (!$patternMatch) {
                 throw new ApiException("not_found", "resource not found");
             }
         } else {
@@ -70,14 +71,14 @@ try {
     $response = new HttpResponse();
     $response->setStatusCode($e->getResponseCode());
     $response->setContent(json_encode(array("error" => $e->getMessage(), "error_description" => $e->getDescription())));
-    if(NULL !== $logger) {
+    if (NULL !== $logger) {
         $logger->logFatal($e->getLogMessage(TRUE) . PHP_EOL . $request . PHP_EOL . $response);
     }
 } catch (Exception $e) {
     $response = new HttpResponse();
     $response->setStatusCode(500);
     $response->setContent(json_encode(array("error" => "internal_server_error", "error_description" => $e->getMessage())));
-    if(NULL !== $logger) {
+    if (NULL !== $logger) {
         $logger->logFatal($e->getMessage() . PHP_EOL . $request . PHP_EOL . $response);
     }
 }
