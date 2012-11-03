@@ -1,18 +1,19 @@
 <?php
 
-require_once '../lib/ApiException.php';
-require_once '../lib/RemoteResourceServer.php';
-
 require_once '../lib/SplClassLoader.php';
+require_once '../lib/ApiException.php';
 
 $c1 = new SplClassLoader("RestService", "../extlib/php-rest-service/lib");
 $c1->register();
+$c2 = new SplClassLoader("OAuth", "../extlib/php-lib-remote-rs/lib");
+$c2->register();
 
 use \RestService\Utils\Config as Config;
 use \RestService\Http\HttpRequest as HttpRequest;
 use \RestService\Http\HttpResponse as HttpResponse;
 use \RestService\Http\IncomingHttpRequest as IncomingHttpRequest;
 use \RestService\Utils\Logger as Logger;
+use \OAuth\RemoteResourceServer as RemoteResourceServer;
 
 $logger = NULL;
 $request = NULL;
