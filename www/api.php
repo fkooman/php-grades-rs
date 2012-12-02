@@ -35,7 +35,7 @@ try {
 
     $request->matchRest("GET", "/grades/", function() use ($rs, $response, $grades) {
         $rs->requireScope("grades");
-        $rs->requireEntitlement("urn:vnd:grades:administration");
+        $rs->requireEntitlement("urn:x-oauth:entitlement:administration");
         $studentList = array();
         foreach (array_keys($grades) as $k) {
             array_push($studentList, array("id" => $k));
@@ -46,7 +46,7 @@ try {
     $request->matchRest("GET", "/grades/:id", function($id) use ($rs, $response, $grades) {
         $rs->requireScope("grades");
         $uid = $rs->getAttribute("uid");
-        if (!$rs->hasEntitlement("urn:vnd:grades:administration") && $id !== $uid[0] && "@me" !== $id) {
+        if (!$rs->hasEntitlement("urn:x-oauth:entitlement:administration") && $id !== $uid[0] && "@me" !== $id) {
             throw new ApiException("forbidden", "resource does not belong to authenticated user");
         }
         if ("@me" === $id) {
