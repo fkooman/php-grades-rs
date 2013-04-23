@@ -26,16 +26,16 @@ try {
     $grades = json_decode(file_get_contents(dirname(__DIR__) . DIRECTORY_SEPARATOR . "data" . DIRECTORY_SEPARATOR . "grades.json"), TRUE);
 
     $rs = new RemoteResourceServer($config->getSectionValues("OAuth"));
-    $rs->verifyRequest();
+    $introspection = $rs->verifyAndHandleRequest();
 
     $request = HttpRequest::fromIncomingHttpRequest(new IncomingHttpRequest());
 
     $response = new HttpResponse();
     $response->setHeader("Content-Type", "application/json");
 
-    $request->matchRest("GET", "/grades/", function() use ($rs, $response, $grades) {
-        $rs->requireScope("grades");
-        $rs->requireEntitlement("urn:x-oauth:entitlement:administration");
+    $request->matchRest("GET", "/grades/", function() use ($introspection, $response, $grades) {
+        $introspection->requireScope("grades");
+        $introspection->requireEntitlement("urn:x-oauth:entitlement:administration");
         $studentList = array();
         foreach (array_keys($grades) as $k) {
             array_push($studentList, array("id" => $k));
@@ -43,14 +43,14 @@ try {
         $response->setContent(json_encode($studentList));
     });
 
-    $request->matchRest("GET", "/grades/:id", function($id) use ($rs, $response, $grades) {
-        $rs->requireScope("grades");
-        $uid = $rs->getAttribute("uid");
-        if (!$rs->hasEntitlement("urn:x-oauth:entitlement:administration") && $id !== $uid[0] && "@me" !== $id) {
+    $request->matchRest("GET", "/grades/:id", function($id) use ($introspection, $response, $grades) {
+        $introspection->requireScope("grades");
+        $uid = $introspection->getSub();
+        if (!$introspection->hasEntitlement("urn:x-oauth:entitlement:administration") && $id !== $uid[0] && "@me" !== $id) {
             throw new ApiException("forbidden", "resource does not belong to authenticated user");
         }
         if ("@me" === $id) {
-            $id = $uid[0];
+            $id = $uid;
         }
         if (!array_key_exists($id, $grades)) {
             throw new ApiException("not_found", "student does not have any grades");
