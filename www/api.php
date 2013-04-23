@@ -5,7 +5,7 @@ require_once '../lib/ApiException.php';
 
 $c1 = new SplClassLoader("RestService", "../extlib/php-rest-service/lib");
 $c1->register();
-$c2 = new SplClassLoader("OAuth", "../extlib/php-lib-remote-rs/lib");
+$c2 = new SplClassLoader("OAuth", "../extlib/php-oauth-lib-rs/lib");
 $c2->register();
 
 use \RestService\Utils\Config as Config;
