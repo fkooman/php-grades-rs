@@ -1,5 +1,5 @@
 #!/bin/sh
-APP_NAME="php-oauth-grades-rs"
+APP_NAME="php-grades-rs"
 
 INSTALL_DIR=`pwd`
 

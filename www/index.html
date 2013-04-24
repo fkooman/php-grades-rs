@@ -9,8 +9,8 @@
 
 <h1>Demo API Server</h1>
 <p>
-Welcome to the <tt>php-oauth-grades-rs</tt> Demo API Server. The code can be 
-found at <a href="https://github.com/fkooman/php-oauth-grades-rs">https://github.com/fkooman/php-oauth-grades-rs</a>.
+Welcome to the <tt>php-grades-rs</tt> Demo API Server. The code can be 
+found at <a href="https://github.com/fkooman/php-grades-rs">https://github.com/fkooman/php-grades-rs</a>.
 </p>
 
 <h1>API Documentation</h1>
@@ -48,7 +48,7 @@ identifier needs to match the identifier of the user who authorized the client.
 
 <blockquote>
 <pre>
-$ curl -i -H "Authorization: Bearer ABCDEF" http://localhost/php-oauth-grades-rs/api.php/grades/bmcatee
+$ curl -i -H "Authorization: Bearer ABCDEF" http://localhost/php-grades-rs/api.php/grades/bmcatee
 HTTP/1.1 200 OK
 Date: Fri, 05 Oct 2012 11:48:51 GMT
 Server: Apache/2.2.22 (Unix) DAV/2 PHP/5.3.15 with Suhosin-Patch mod_ssl/2.2.22 OpenSSL/0.9.8r
@@ -68,7 +68,7 @@ authorized the client.
 
 <blockquote>
 <pre>
-$ curl -i -H "Authorization: Bearer ABCDEF" http://localhost/php-oauth-grades-rs/api.php/grades/@me
+$ curl -i -H "Authorization: Bearer ABCDEF" http://localhost/php-grades-rs/api.php/grades/@me
 HTTP/1.1 200 OK
 Date: Fri, 05 Oct 2012 11:48:51 GMT
 Server: Apache/2.2.22 (Unix) DAV/2 PHP/5.3.15 with Suhosin-Patch mod_ssl/2.2.22 OpenSSL/0.9.8r
@@ -93,7 +93,7 @@ The response format of getting a list of students is like this:
 
 <blockquote>
 <pre>
-$ curl -i -H "Authorization: Bearer FEDCBA" http://localhost/php-oauth-grades-rs/api.php/grades/      
+$ curl -i -H "Authorization: Bearer FEDCBA" http://localhost/php-grades-rs/api.php/grades/      
 HTTP/1.1 200 OK
 Date: Fri, 05 Oct 2012 11:51:32 GMT
 Server: Apache/2.2.22 (Unix) DAV/2 PHP/5.3.15 with Suhosin-Patch mod_ssl/2.2.22 OpenSSL/0.9.8r
@@ -121,7 +121,7 @@ There are a number of errors that can be triggered, to list a few:</p>
 
 <blockquote>
 <pre>
-$ curl -i -H "Authorization: Bearer ABCDEF" http://localhost/php-oauth-grades-rs/api.php/grades/someotheruser
+$ curl -i -H "Authorization: Bearer ABCDEF" http://localhost/php-grades-rs/api.php/grades/someotheruser
 HTTP/1.1 403 Forbidden
 Date: Wed, 15 Aug 2012 10:29:00 GMT
 Server: Apache/2.2.22 (Unix) DAV/2 PHP/5.3.13 with Suhosin-Patch mod_ssl/2.2.22 OpenSSL/0.9.8r
