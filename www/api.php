@@ -1,19 +1,13 @@
 <?php
 
-require_once '../lib/SplClassLoader.php';
-require_once '../lib/ApiException.php';
+require_once dirname(__DIR__) . "/vendor/autoload.php";
 
-$c1 = new SplClassLoader("RestService", "../extlib/php-rest-service/lib");
-$c1->register();
-$c2 = new SplClassLoader("OAuth", "../extlib/php-oauth-lib-rs/lib");
-$c2->register();
-
-use \RestService\Utils\Config as Config;
-use \RestService\Http\HttpRequest as HttpRequest;
-use \RestService\Http\HttpResponse as HttpResponse;
-use \RestService\Http\IncomingHttpRequest as IncomingHttpRequest;
-use \RestService\Utils\Logger as Logger;
-use \OAuth\RemoteResourceServer as RemoteResourceServer;
+use RestService\Utils\Config;
+use RestService\Http\HttpRequest;
+use RestService\Http\HttpResponse;
+use RestService\Http\IncomingHttpRequest;
+use RestService\Utils\Logger;
+use fkooman\oauth\rs\RemoteResourceServer;
 
 $logger = NULL;
 $request = NULL;

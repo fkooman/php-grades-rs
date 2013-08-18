@@ -1,0 +1,102 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "d6d0ad4158230ed9b4d5dbd8bcae9cd3",
+    "packages": [
+        {
+            "name": "fkooman/php-oauth-lib-rs",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fkooman/php-oauth-lib-rs.git",
+                "reference": "b29976f45bfd05246e88e58a4aaddbadd3ef5c9c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fkooman/php-oauth-lib-rs/zipball/b29976f45bfd05246e88e58a4aaddbadd3ef5c9c",
+                "reference": "b29976f45bfd05246e88e58a4aaddbadd3ef5c9c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "fkooman\\oauth\\rs\\": "src/"
+                }
+            },
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "email": "fkooman@tuxed.net",
+                    "name": "François Kooman",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Library for implementing OAuth 2.0 resource servers",
+            "support": {
+                "source": "https://github.com/fkooman/php-oauth-lib-rs/tree/develop",
+                "issues": "https://github.com/fkooman/php-oauth-lib-rs/issues"
+            },
+            "time": "2013-08-18 09:22:43"
+        },
+        {
+            "name": "fkooman/php-rest-service",
+            "version": "0.9.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fkooman/php-rest-service.git",
+                "reference": "0.9.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fkooman/php-rest-service/zipball/0.9.3",
+                "reference": "0.9.3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "RestService\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "François Kooman",
+                    "email": "fkooman@tuxed.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP library to develop REST applications",
+            "time": "2013-06-12 13:51:56"
+        }
+    ],
+    "packages-dev": [
+
+    ],
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "fkooman/php-oauth-lib-rs": 20
+    },
+    "platform": [
+
+    ],
+    "platform-dev": [
+
+    ]
+}

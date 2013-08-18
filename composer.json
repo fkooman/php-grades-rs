@@ -1,0 +1,17 @@
+{
+    "autoload": {
+        "psr-0": {
+            "\\": "lib/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/fkooman/php-oauth-lib-rs"
+        }
+    ],
+    "require": {
+        "fkooman/php-oauth-lib-rs": "dev-develop",
+        "fkooman/php-rest-service": "0.9.*"
+    }
+}
