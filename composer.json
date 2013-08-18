@@ -4,14 +4,8 @@
             "\\": "lib/"
         }
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/fkooman/php-oauth-lib-rs"
-        }
-    ],
     "require": {
-        "fkooman/php-oauth-lib-rs": "dev-develop",
+        "fkooman/php-oauth-lib-rs": "0.1.*",
         "fkooman/php-rest-service": "0.9.*"
     }
 }

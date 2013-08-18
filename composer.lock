@@ -3,20 +3,20 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "d6d0ad4158230ed9b4d5dbd8bcae9cd3",
+    "hash": "76ae38edd2d24859280b9ab255552db1",
     "packages": [
         {
             "name": "fkooman/php-oauth-lib-rs",
-            "version": "dev-develop",
+            "version": "0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fkooman/php-oauth-lib-rs.git",
-                "reference": "d0b4a51a51939021806a9ef5fadd965e6d0b8b7e"
+                "reference": "0.1.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fkooman/php-oauth-lib-rs/zipball/d0b4a51a51939021806a9ef5fadd965e6d0b8b7e",
-                "reference": "d0b4a51a51939021806a9ef5fadd965e6d0b8b7e",
+                "url": "https://api.github.com/repos/fkooman/php-oauth-lib-rs/zipball/0.1.0",
+                "reference": "0.1.0",
                 "shasum": ""
             },
             "require": {
@@ -28,22 +28,19 @@
                     "fkooman\\oauth\\rs\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "Apache-2.0"
             ],
             "authors": [
                 {
-                    "email": "fkooman@tuxed.net",
                     "name": "François Kooman",
+                    "email": "fkooman@tuxed.net",
                     "role": "Developer"
                 }
             ],
             "description": "Library for implementing OAuth 2.0 resource servers",
-            "support": {
-                "source": "https://github.com/fkooman/php-oauth-lib-rs/tree/develop",
-                "issues": "https://github.com/fkooman/php-oauth-lib-rs/issues"
-            },
-            "time": "2013-08-18 10:31:01"
+            "time": "2013-08-18 12:09:22"
         },
         {
             "name": "fkooman/php-rest-service",
@@ -90,9 +87,9 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "fkooman/php-oauth-lib-rs": 20
-    },
+    "stability-flags": [
+
+    ],
     "platform": [
 
     ],
