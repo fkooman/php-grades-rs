@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fkooman/php-oauth-lib-rs.git",
-                "reference": "b29976f45bfd05246e88e58a4aaddbadd3ef5c9c"
+                "reference": "d0b4a51a51939021806a9ef5fadd965e6d0b8b7e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fkooman/php-oauth-lib-rs/zipball/b29976f45bfd05246e88e58a4aaddbadd3ef5c9c",
-                "reference": "b29976f45bfd05246e88e58a4aaddbadd3ef5c9c",
+                "url": "https://api.github.com/repos/fkooman/php-oauth-lib-rs/zipball/d0b4a51a51939021806a9ef5fadd965e6d0b8b7e",
+                "reference": "d0b4a51a51939021806a9ef5fadd965e6d0b8b7e",
                 "shasum": ""
             },
             "require": {
@@ -43,7 +43,7 @@
                 "source": "https://github.com/fkooman/php-oauth-lib-rs/tree/develop",
                 "issues": "https://github.com/fkooman/php-oauth-lib-rs/issues"
             },
-            "time": "2013-08-18 09:22:43"
+            "time": "2013-08-18 10:31:01"
         },
         {
             "name": "fkooman/php-rest-service",

@@ -5,6 +5,11 @@ serviceName = "Grades API"
 [OAuth]
 introspectionEndpoint = "http://localhost/php-oauth/introspect.php"
 
+; disable the SSL certificate check while talking to the introspection endpoint,
+; this is NOT RECOMMENDED, only for development pursposes, DO NOT USE IN 
+; PRODUCTION
+;disableCertCheck = 1
+
 ; Logging
 [Log]
 ; any of DEBUG, INFO, WARNING or FATAL
