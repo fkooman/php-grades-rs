@@ -3,8 +3,84 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "1cbbb2e4614aa7ad79efe19234600a92",
+    "hash": "1b77d20d33d365d346882cd35708e906",
     "packages": [
+        {
+            "name": "fkooman/php-lib-config",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fkooman/php-lib-config.git",
+                "reference": "0.2.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fkooman/php-lib-config/zipball/0.2.0",
+                "reference": "0.2.0",
+                "shasum": ""
+            },
+            "require": {
+                "fkooman/php-lib-json": "0.1.0",
+                "php": ">=5.3.3",
+                "symfony/yaml": "2.3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "fkooman\\Config\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "François Kooman",
+                    "email": "fkooman@tuxed.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP library to handle YAML, INI and JSON configuration files",
+            "time": "2013-08-09 14:13:52"
+        },
+        {
+            "name": "fkooman/php-lib-json",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fkooman/php-lib-json.git",
+                "reference": "0.1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fkooman/php-lib-json/zipball/0.1.0",
+                "reference": "0.1.0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "fkooman\\Json\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "François Kooman",
+                    "email": "fkooman@tuxed.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP library to encode and decode JSON",
+            "time": "2013-05-30 12:04:47"
+        },
         {
             "name": "fkooman/php-oauth-lib-rs",
             "version": "dev-develop",
@@ -497,6 +573,53 @@
             "description": "Symfony Routing Component",
             "homepage": "http://symfony.com",
             "time": "2013-08-02 20:53:38"
+        },
+        {
+            "name": "symfony/yaml",
+            "version": "v2.3.3",
+            "target-dir": "Symfony/Component/Yaml",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Yaml.git",
+                "reference": "v2.3.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/v2.3.3",
+                "reference": "v2.3.3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Yaml\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Yaml Component",
+            "homepage": "http://symfony.com",
+            "time": "2013-07-21 12:12:18"
         }
     ],
     "packages-dev": [

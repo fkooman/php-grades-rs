@@ -7,12 +7,10 @@ use fkooman\oauth\rs\RemoteResourceServerException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use fkooman\grades\ApiException;
+use fkooman\Config\Config;
 
-$remoteResourceServer = new RemoteResourceServer(
-    array(
-        "introspectionEndpoint" => "http://localhost/oauth/php-oauth/introspect.php"
-    )
-);
+$config = Config::fromIniFile(dirname(__DIR__) . DIRECTORY_SEPARATOR . "config" . DIRECTORY_SEPARATOR . "rs.ini");
+$remoteResourceServer = new RemoteResourceServer($config->s("OAuth")->toArray());
 
 $grades = json_decode(
     file_get_contents(

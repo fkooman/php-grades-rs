@@ -8,6 +8,7 @@
     "license": "Apache-2.0",
     "name": "fkooman/php-grades-rs",
     "require": {
+        "fkooman/php-lib-config": "0.2.*",
         "fkooman/php-oauth-lib-rs": "dev-develop",
         "silex/silex": "1.1.*"
     }

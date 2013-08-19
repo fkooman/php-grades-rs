@@ -2,12 +2,12 @@
 This is a demonstration OAuth Resource Server.
 
 The API documentation is available at the installation URL, e.g.: 
-`http://localhost/oauth/php-grades-rs/`.
+`http://localhost/php-grades-rs/`.
 
 # Configuration
-To install the required dependencies run:
+To install the required dependencies using [Composer](http://getcomposer.org):
 
-    $ sh docs/install_dependencies.sh
+    $ php composer.phar install
 
 To set file permissions and setup the configuration file run:
 
