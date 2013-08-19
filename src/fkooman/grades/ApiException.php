@@ -1,18 +1,20 @@
 <?php
 
+namespace fkooman\grades;
+
 class ApiException extends \Exception
 {
-    private $_description;
+    private $description;
 
     public function __construct($message, $description, $code = 0, Exception $previous = null)
     {
-        $this->_description = $description;
+        $this->description = $description;
         parent::__construct($message, $code, $previous);
     }
 
     public function getDescription()
     {
-        return $this->_description;
+        return $this->description;
     }
 
     public function getResponseCode()
@@ -38,6 +40,11 @@ class ApiException extends \Exception
         }
 
         return $msg;
+    }
+
+    public function getResponseAsArray()
+    {
+        return array("code" => $this->getResponseCode(), "error" => $this->message, "error_description" => $this->description);
     }
 
 }

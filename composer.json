@@ -1,11 +1,14 @@
 {
     "autoload": {
         "psr-0": {
-            "\\": "lib/"
+            "fkooman\\grades\\": "src/"
         }
     },
+    "description": "PHP API REST service protected using OAuth v2 for the Summerschool Mobile Apps Workshop",
+    "license": "Apache-2.0",
+    "name": "fkooman/php-grades-rs",
     "require": {
-        "fkooman/php-oauth-lib-rs": "0.1.*",
-        "fkooman/php-rest-service": "0.9.*"
+        "fkooman/php-oauth-lib-rs": "dev-develop",
+        "silex/silex": "1.1.*"
     }
 }
