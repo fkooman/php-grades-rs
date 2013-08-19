@@ -7,16 +7,16 @@
     "packages": [
         {
             "name": "fkooman/php-oauth-lib-rs",
-            "version": "0.1.0",
+            "version": "0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fkooman/php-oauth-lib-rs.git",
-                "reference": "0.1.0"
+                "reference": "0.1.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fkooman/php-oauth-lib-rs/zipball/0.1.0",
-                "reference": "0.1.0",
+                "url": "https://api.github.com/repos/fkooman/php-oauth-lib-rs/zipball/0.1.1",
+                "reference": "0.1.1",
                 "shasum": ""
             },
             "require": {
@@ -40,7 +40,7 @@
                 }
             ],
             "description": "Library for implementing OAuth 2.0 resource servers",
-            "time": "2013-08-18 12:09:22"
+            "time": "2013-08-19 10:38:58"
         },
         {
             "name": "fkooman/php-rest-service",
