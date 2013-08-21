@@ -1,6 +1,3 @@
-; default configuration
-serviceName = "Grades API"
-
 ; OAuth AS
 [OAuth]
 introspectionEndpoint = "http://localhost/php-oauth/introspect.php"
