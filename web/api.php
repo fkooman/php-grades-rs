@@ -33,6 +33,18 @@ $grades = json_decode(
 $app = new Silex\Application();
 $app['debug'] = true;
 
+$app->get('/user_info', function(Request $request) use ($app, $resourceServer) {
+    $resourceServer->setAuthorizationHeader($request->headers->get("Authorization"));
+    $tokenIntrospection = $resourceServer->verifyToken();
+    $info = array();
+    if (hasEntitlement($tokenIntrospection->getToken(), "urn:x-oauth:entitlement:administration")) {
+        $info["admin"] = true;
+    } else {
+        $info["admin"] = false;
+    }
+
+    return $app->json($info);
+});
 $app->get('/grades/', function(Request $request) use ($app, $resourceServer, $grades) {
     $resourceServer->setAuthorizationHeader($request->headers->get("Authorization"));
     $introspection = $resourceServer->verifyToken();
