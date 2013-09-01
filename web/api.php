@@ -34,7 +34,8 @@ $app = new Silex\Application();
 $app['debug'] = true;
 
 $app->get('/grades/', function(Request $request) use ($app, $resourceServer, $grades) {
-    $introspection = $resourceServer->verifyRequest($request->headers->get("Authorization"), $request->get('access_token'));
+    $resourceServer->setAuthorizationHeader($request->headers->get("Authorization"));
+    $introspection = $resourceServer->verifyToken();
     if (!$introspection->getActive()) {
         throw new ResourceServerException("invalid_token", "the token provided is not valid");
     }
@@ -49,7 +50,8 @@ $app->get('/grades/', function(Request $request) use ($app, $resourceServer, $gr
 });
 
 $app->get('/grades/{id}', function(Request $request, $id) use ($app, $resourceServer, $grades) {
-    $introspection = $resourceServer->verifyRequest($request->headers->get("Authorization"), $request->get('access_token'));
+    $resourceServer->setAuthorizationHeader($request->headers->get("Authorization"));
+    $introspection = $resourceServer->verifyToken();
     if (!$introspection->getActive()) {
         throw new ResourceServerException("invalid_token", "the token provided is not valid");
     }
