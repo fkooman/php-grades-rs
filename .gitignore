@@ -1,3 +1,4 @@
 /config/*.ini
-/data
+/data/*.json
+/data/logs/
 /vendor

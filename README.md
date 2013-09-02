@@ -18,3 +18,5 @@ point to the OAuth authorization server's introspection endpoint.
 
 Don't forget to add the Apache configuration snippet that was shown as output
 of the `configure.sh` script to your Apache configuration.
+
+Also do not forget to copy `data/grades.json.example` to `data/grades.json`!
