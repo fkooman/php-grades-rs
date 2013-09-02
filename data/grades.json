@@ -1,5 +1,5 @@
 {
-    "bmcatee": [
+    "bmcatee@example.org": [
         {
             "course": "Chemistry", 
             "grade": 9
@@ -25,7 +25,7 @@
             "grade": 4
         }
     ], 
-    "jmatson": [
+    "jmatson@example.org": [
         {
             "course": "Chemistry", 
             "grade": 9
@@ -43,7 +43,7 @@
             "grade": 9
         }
     ], 
-    "jstroud": [
+    "jstroud@example.org": [
         {
             "course": "Biology", 
             "grade": 8
@@ -61,7 +61,7 @@
             "grade": 7
         }
     ], 
-    "mcram": [
+    "mcram@example.org": [
         {
             "course": "Biology", 
             "grade": 7
@@ -79,7 +79,7 @@
             "grade": 7
         }
     ], 
-    "mwisdom": [
+    "mwisdom@example.org": [
         {
             "course": "Chemistry", 
             "grade": 5
