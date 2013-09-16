@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "8a0296e2bad28b4ae87a23b4af898f29",
+    "hash": "bc4e5dd9be5dc234c756e3fb36e5d53f",
     "packages": [
         {
             "name": "fkooman/php-lib-config",
@@ -83,16 +83,16 @@
         },
         {
             "name": "fkooman/php-oauth-lib-rs",
-            "version": "0.4.0",
+            "version": "0.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fkooman/php-oauth-lib-rs.git",
-                "reference": "73e314b15c4b4920a1e10e903bdac6ba5b4712f7"
+                "reference": "1a1e67f51a61bc6e3cac5eae34fb43d0df409a21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fkooman/php-oauth-lib-rs/zipball/73e314b15c4b4920a1e10e903bdac6ba5b4712f7",
-                "reference": "73e314b15c4b4920a1e10e903bdac6ba5b4712f7",
+                "url": "https://api.github.com/repos/fkooman/php-oauth-lib-rs/zipball/1a1e67f51a61bc6e3cac5eae34fb43d0df409a21",
+                "reference": "1a1e67f51a61bc6e3cac5eae34fb43d0df409a21",
                 "shasum": ""
             },
             "require": {
@@ -102,7 +102,7 @@
             "type": "library",
             "autoload": {
                 "psr-0": {
-                    "fkooman\\oauth\\rs\\": "src/"
+                    "fkooman\\OAuth\\ResourceServer\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -117,20 +117,20 @@
                 }
             ],
             "description": "Library for implementing OAuth 2.0 resource servers",
-            "time": "2013-08-30 14:18:42"
+            "time": "2013-09-16 20:01:33"
         },
         {
             "name": "guzzle/guzzle",
-            "version": "v3.7.2",
+            "version": "v3.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "v3.7.2"
+                "reference": "0f16aad385528b5cf790392cb4a4d16cf600e944"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/v3.7.2",
-                "reference": "v3.7.2",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/0f16aad385528b5cf790392cb4a4d16cf600e944",
+                "reference": "0f16aad385528b5cf790392cb4a4d16cf600e944",
                 "shasum": ""
             },
             "require": {
@@ -209,7 +209,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2013-08-02 18:31:05"
+            "time": "2013-09-08 21:09:18"
         },
         {
             "name": "pimple/pimple",

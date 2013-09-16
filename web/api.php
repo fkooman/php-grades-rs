@@ -2,8 +2,8 @@
 
 require_once dirname(__DIR__) . "/vendor/autoload.php";
 
-use fkooman\oauth\rs\ResourceServer;
-use fkooman\oauth\rs\ResourceServerException;
+use fkooman\OAuth\ResourceServer\ResourceServer;
+use fkooman\OAuth\ResourceServer\ResourceServerException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use fkooman\grades\ApiException;
@@ -48,9 +48,6 @@ $app->get('/user_info', function(Request $request) use ($app, $resourceServer) {
 $app->get('/grades/', function(Request $request) use ($app, $resourceServer, $grades) {
     $resourceServer->setAuthorizationHeader($request->headers->get("Authorization"));
     $introspection = $resourceServer->verifyToken();
-    if (!$introspection->getActive()) {
-        throw new ResourceServerException("invalid_token", "the token provided is not valid");
-    }
     requireScope($introspection->getScope(), "grades");
     requireEntitlement($introspection->getToken(), "urn:x-oauth:entitlement:administration");
     $studentList = array();
@@ -64,9 +61,6 @@ $app->get('/grades/', function(Request $request) use ($app, $resourceServer, $gr
 $app->get('/grades/{id}', function(Request $request, $id) use ($app, $resourceServer, $grades) {
     $resourceServer->setAuthorizationHeader($request->headers->get("Authorization"));
     $introspection = $resourceServer->verifyToken();
-    if (!$introspection->getActive()) {
-        throw new ResourceServerException("invalid_token", "the token provided is not valid");
-    }
     requireScope($introspection->getScope(), "grades");
     $uid = $introspection->getSub();
     if ("@me" === $id) {
