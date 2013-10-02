@@ -2,104 +2,143 @@
 
 require_once dirname(__DIR__) . "/vendor/autoload.php";
 
+use fkooman\Rest\Service;
+use fkooman\Http\Request;
+use fkooman\Http\JsonResponse;
+use fkooman\Http\IncomingRequest;
+
 use fkooman\OAuth\ResourceServer\ResourceServer;
 use fkooman\OAuth\ResourceServer\ResourceServerException;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
+
 use fkooman\grades\ApiException;
+
 use fkooman\Config\Config;
+
 use Guzzle\Http\Client;
 
-$config = Config::fromIniFile(dirname(__DIR__) . DIRECTORY_SEPARATOR . "config" . DIRECTORY_SEPARATOR . "rs.ini");
+try {
+    $config = Config::fromIniFile(dirname(__DIR__) . DIRECTORY_SEPARATOR . "config" . DIRECTORY_SEPARATOR . "rs.ini");
 
-$introspectionUrl = $config->s("OAuth")->l("introspectionEndpoint");
-$client = new Client(
-    $introspectionUrl,
-    array(
-        "request.options" => array(
-            "ssl.certificate_authority" => !(bool) $config->s("OAuth")->l("disableCertCheck")
+    $introspectionUrl = $config->s("OAuth")->l("introspectionEndpoint");
+    $client = new Client(
+        $introspectionUrl,
+        array(
+            "request.options" => array(
+                "ssl.certificate_authority" => !(bool) $config->s("OAuth")->l("disableCertCheck")
+            )
         )
-    )
-);
-$resourceServer = new ResourceServer($client);
+    );
+    $resourceServer = new ResourceServer($client);
 
-$grades = json_decode(
-    file_get_contents(
-        dirname(__DIR__) . DIRECTORY_SEPARATOR . "data" . DIRECTORY_SEPARATOR . "grades.json"
-    ),
-    true
-);
+    $grades = json_decode(
+        file_get_contents(
+            dirname(__DIR__) . DIRECTORY_SEPARATOR . "data" . DIRECTORY_SEPARATOR . "grades.json"
+        ),
+        true
+    );
 
-$app = new Silex\Application();
-$app['debug'] = true;
+    $request = Request::fromIncomingRequest(
+        new IncomingRequest()
+    );
+    $service = new Service($request);
 
-$app->get('/user_info', function(Request $request) use ($app, $resourceServer) {
-    $resourceServer->setAuthorizationHeader($request->headers->get("Authorization"));
-    $tokenIntrospection = $resourceServer->verifyToken();
-    $info = array();
-    if (hasEntitlement($tokenIntrospection->getToken(), "urn:x-oauth:entitlement:administration")) {
-        $info["admin"] = true;
-    } else {
-        $info["admin"] = false;
-    }
+    $service->match(
+        'GET',
+        '/user_info',
+        function () use ($request, $resourceServer) {
+            $resourceServer->setAuthorizationHeader($request->getHeader("Authorization"));
+            $tokenIntrospection = $resourceServer->verifyToken();
+            $info = array();
+            if (hasEntitlement($tokenIntrospection->getToken(), "urn:x-oauth:entitlement:administration")) {
+                $info["admin"] = true;
+            } else {
+                $info["admin"] = false;
+            }
 
-    return $app->json($info);
-});
-$app->get('/grades/', function(Request $request) use ($app, $resourceServer, $grades) {
-    $resourceServer->setAuthorizationHeader($request->headers->get("Authorization"));
-    $introspection = $resourceServer->verifyToken();
-    requireScope($introspection->getScope(), "grades");
-    requireEntitlement($introspection->getToken(), "urn:x-oauth:entitlement:administration");
-    $studentList = array();
-    foreach (array_keys($grades) as $k) {
-        array_push($studentList, array("id" => $k));
-    }
+            $response = new JsonResponse(200);
+            $response->setContent($info);
 
-    return $app->json($studentList);
-});
-
-$app->get('/grades/{id}', function(Request $request, $id) use ($app, $resourceServer, $grades) {
-    $resourceServer->setAuthorizationHeader($request->headers->get("Authorization"));
-    $introspection = $resourceServer->verifyToken();
-    requireScope($introspection->getScope(), "grades");
-    $uid = $introspection->getSub();
-    if ("@me" === $id) {
-        $id = $uid;
-    }
-
-    if ($id !== $uid) {
-        if (!hasEntitlement($introspection->getToken(), "urn:x-oauth:entitlement:administration")) {
-            throw new ApiException("forbidden", "resource does not belong to authenticated user");
+            return $response;
         }
-    }
+    );
+    $service->match(
+        'GET',
+        '/grades/',
+        function () use ($request, $resourceServer, $grades) {
+            $resourceServer->setAuthorizationHeader($request->getHeader("Authorization"));
+            $introspection = $resourceServer->verifyToken();
+            requireScope($introspection->getScope(), "grades");
+            requireEntitlement($introspection->getToken(), "urn:x-oauth:entitlement:administration");
+            $studentList = array();
+            foreach (array_keys($grades) as $k) {
+                array_push($studentList, array("id" => $k));
+            }
 
-    if (!array_key_exists($id, $grades)) {
-        throw new ApiException("not_found", "student does not have any grades");
-    }
+            $response = new JsonResponse(200);
+            $response->setContent($studentList);
 
-    return $app->json($grades[$id]);
-});
+            return $response;
+        }
+    );
 
-$app->error(function (ResourceServerException $e, $code) {
-    return new JsonResponse(
+    $service->match(
+        'GET',
+        '/grades/:id',
+        function ($id) use ($request, $resourceServer, $grades) {
+            $resourceServer->setAuthorizationHeader($request->getHeader("Authorization"));
+            $introspection = $resourceServer->verifyToken();
+            requireScope($introspection->getScope(), "grades");
+            $uid = $introspection->getSub();
+            if ("@me" === $id) {
+                $id = $uid;
+            }
+
+            if ($id !== $uid) {
+                if (!hasEntitlement($introspection->getToken(), "urn:x-oauth:entitlement:administration")) {
+                    throw new ApiException("forbidden", "resource does not belong to authenticated user");
+                }
+            }
+
+            if (!array_key_exists($id, $grades)) {
+                throw new ApiException("not_found", "student does not have any grades");
+            }
+
+            $response = new JsonResponse();
+            $response->setContent($grades[$id]);
+
+            return $response;
+        }
+    );
+    $service->run()->sendResponse();
+} catch (ResourceServerException $e) {
+    // when there is a problem with the OAuth authorization
+    $response = new JsonResponse($e->getStatusCode());
+    $response->setHeader("WWW-Authenticate", $e->getAuthenticateHeader());
+    $response->setContent(
         array(
             "error" => $e->getMessage(),
             "error_description" => $e->getDescription(),
             "code" => $e->getStatusCode()
-        ),
-        $e->getStatusCode(),
-        array("WWW-Authenticate" => $e->getAuthenticateHeader())
+        )
     );
-});
-$app->error(function(ApiException $e, $code) {
-    return new JsonResponse($e->getResponseAsArray(), $e->getResponseCode());
-});
-
-$app->error(function(Exception $e, $code) {
-    return new JsonResponse(array("code" => $code, "error" => $e->getMessage()), $code);
-});
-
-$app->run();
+    $response->sendResponse();
+} catch (ApiException $e) {
+    // when there is a problem with the OAuth authorization
+    $response = new JsonResponse($e->getStatusCode());
+    $response->setContent($e->getResponseAsArray());
+    $response->sendResponse();
+} catch (Exception $e) {
+    // in all other cases...
+    $response = new JsonResponse(500);
+    $response->setContent(
+        array(
+            "code" => 500,
+            "error" => "internal_server_error",
+            "error_description" => $e->getMessage()
+        )
+    );
+    $response->sendResponse();
+}
 
 // scope and (proprietary) entitlement helper functions, should probably be
 // moved to the php-oauth-lib-rs library at some point

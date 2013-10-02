@@ -31,7 +31,7 @@ class ApiException extends \Exception
         }
     }
 
-    public function getLogMessage($includeTrace = FALSE)
+    public function getLogMessage($includeTrace = false)
     {
         $msg = 'Message    : ' . $this->getMessage() . PHP_EOL .
                'Description: ' . $this->getDescription() . PHP_EOL;
@@ -44,7 +44,10 @@ class ApiException extends \Exception
 
     public function getResponseAsArray()
     {
-        return array("code" => $this->getResponseCode(), "error" => $this->message, "error_description" => $this->description);
+        return array(
+            "code" => $this->getResponseCode(),
+            "error" => $this->message,
+            "error_description" => $this->description
+        );
     }
-
 }
